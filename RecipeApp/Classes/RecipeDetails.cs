@@ -17,7 +17,7 @@ namespace RecipeApp.Classes
         public int numSteps = 0;
         public string[] ingredients;
         public string[] steps;
-
+ //-----------------------------------------=========------------------------------------//
         public void recipeIngredients()
         {
             Console.Write("Enter the name of recipe: ");
@@ -37,11 +37,9 @@ namespace RecipeApp.Classes
                 string ingredientUnit = Console.ReadLine();
                 ingredients[i] = $"{ingredientName} - {ingredientQuantity} {ingredientUnit}";
             }
-
             Console.WriteLine($"Recipe: {recipeName}");
-            printRecipe();
         }
-
+ //-----------------------------------------=========------------------------------------//
         public void recipeSteps()
         {
             Console.WriteLine("Enter the number of steps for the recipe: ");
@@ -54,27 +52,21 @@ namespace RecipeApp.Classes
                 string step = Console.ReadLine();
                 steps[i] = step;
             }
-
-            Console.WriteLine("Recipe Steps: ");
-            printSteps();
-        }   
-
-        public void printRecipe()
-        { 
+        }
+        //-----------------------------------------=========------------------------------------//
+         public void printRecipeDetails()
+        {
+            Console.WriteLine("Recipe Details: ");
             Console.WriteLine("Ingredients: ");
             foreach (string ingredient in ingredients)
             {
                 Console.WriteLine(ingredient);
             }
-        }
-
-        public void printSteps()
-        {
             Console.WriteLine("Steps: ");
             foreach (string step in steps)
             {
                 Console.WriteLine(step);
-            }   
+            }
         }
     }
 }

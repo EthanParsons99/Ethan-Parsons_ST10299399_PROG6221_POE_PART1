@@ -10,10 +10,10 @@ namespace RecipeApp
     {
         static void Main(string[] args)
         {
-            
-RecipeApp.Classes.RecipeDetails rd = new RecipeApp.Classes.RecipeDetails();
+            RecipeApp.Classes.RecipeDetails rd = new RecipeApp.Classes.RecipeDetails();
             rd.recipeIngredients();
             rd.recipeSteps();
+            rd.printRecipeDetails();
         }
     }
 }
