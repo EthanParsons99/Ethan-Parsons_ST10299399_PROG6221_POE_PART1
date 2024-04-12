@@ -13,6 +13,7 @@ namespace RecipeApp
             
 RecipeApp.Classes.RecipeDetails rd = new RecipeApp.Classes.RecipeDetails();
             rd.recipeIngredients();
+            rd.recipeSteps();
         }
     }
 }

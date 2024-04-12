@@ -42,6 +42,23 @@ namespace RecipeApp.Classes
             printRecipe();
         }
 
+        public void recipeSteps()
+        {
+            Console.WriteLine("Enter the number of steps for the recipe: ");
+            int numSteps = Convert.ToInt32(Console.ReadLine());
+            steps = new string[numSteps];
+
+            for (int i = 0; i < numSteps; i++)
+            {
+                Console.WriteLine("Enter the step: ");
+                string step = Console.ReadLine();
+                steps[i] = step;
+            }
+
+            Console.WriteLine("Recipe Steps: ");
+            printSteps();
+        }   
+
         public void printRecipe()
         { 
             Console.WriteLine("Ingredients: ");
@@ -49,6 +66,15 @@ namespace RecipeApp.Classes
             {
                 Console.WriteLine(ingredient);
             }
+        }
+
+        public void printSteps()
+        {
+            Console.WriteLine("Steps: ");
+            foreach (string step in steps)
+            {
+                Console.WriteLine(step);
+            }   
         }
     }
 }
