@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-/// <summary>
+﻿/// <summary>
 /// Ethan Parsons
 /// ST10299399
 /// PROG6221
 /// </summary>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
  //-----------------------------------------=========------------------------------------//
 namespace RecipeApp.Classes
 {
-    internal class RecipeDetails
+    public class RecipeDetails
     {
         public int numIngredients = 0;
         public int numSteps = 0;
@@ -23,7 +23,7 @@ namespace RecipeApp.Classes
             Console.Write("Enter the name of recipe: ");
             string recipeName = Console.ReadLine();
             Console.WriteLine("Enter the number of ingredients: ");
-            int numIngredients = Convert.ToInt32(Console.ReadLine());
+            numIngredients = Convert.ToInt32(Console.ReadLine());
             ingredients = new string[numIngredients];
 
 
@@ -32,7 +32,7 @@ namespace RecipeApp.Classes
                 Console.WriteLine("Enter the name ingredient: ");
                 string ingredientName = Console.ReadLine();
                 Console.WriteLine("Enter the qauntity if ingrediant: ");
-                string ingredientQuantity = Console.ReadLine();
+                string ingredientQuantity = Console.ReadLine(); 
                 Console.WriteLine("Enter the unit of measurement: ");
                 string ingredientUnit = Console.ReadLine();
                 ingredients[i] = $"{ingredientName} - {ingredientQuantity} {ingredientUnit}";
@@ -43,7 +43,7 @@ namespace RecipeApp.Classes
         public void recipeSteps()
         {
             Console.WriteLine("Enter the number of steps for the recipe: ");
-            int numSteps = Convert.ToInt32(Console.ReadLine());
+            numSteps = Convert.ToInt32(Console.ReadLine());
             steps = new string[numSteps];
 
             for (int i = 0; i < numSteps; i++)
@@ -69,7 +69,28 @@ namespace RecipeApp.Classes
             }
         }
         //-----------------------------------------=========------------------------------------//
+        public void scaleRecipe()
+        {
+            Console.WriteLine("Do you want to scale the recipe? (yes/no)");
+            string scale = Console.ReadLine();
+            if (scale == "yes")
+            {
+                Console.WriteLine("By how much should the ingrdients be scaled? : ");
+                int scaleBy = Convert.ToInt32(Console.ReadLine());
 
+                for (int i = 0; i < numIngredients; i++)
+                {
+                    string[] parts = ingredients[i].Split('-');
+                    string qauntity = parts[1].Trim();
+                    string[] qauntityParts = qauntity.Split(' ');
+                    string qauntityValue = qauntityParts[0];
+                    int newQauntity = Convert.ToInt32(qauntityValue) * scaleBy;
+                    ingredients[i] = $"{parts[0]} - {newQauntity} {qauntityParts[1]}";
+                }
+                Console.WriteLine("Recipe has been scaled by {0}", scaleBy);
+                printRecipeDetails();
+            }
+        }
     }
 }
  //-----------------------------------------End of file------------------------------------//
