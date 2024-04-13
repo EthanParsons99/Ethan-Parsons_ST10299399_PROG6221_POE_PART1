@@ -39,7 +39,7 @@ namespace RecipeApp.Classes
             }
             Console.WriteLine($"Recipe: {recipeName}");
         }
- //-----------------------------------------=========------------------------------------//
+        //-----------------------------------------=========------------------------------------//
         public void recipeSteps()
         {
             Console.WriteLine("Enter the number of steps for the recipe: ");
@@ -54,7 +54,7 @@ namespace RecipeApp.Classes
             }
         }
         //-----------------------------------------=========------------------------------------//
-         public void printRecipeDetails()
+        public void printRecipeDetails()
         {
             Console.WriteLine("Recipe Details: ");
             Console.WriteLine("Ingredients: ");
@@ -68,6 +68,8 @@ namespace RecipeApp.Classes
                 Console.WriteLine(step);
             }
         }
+        //-----------------------------------------=========------------------------------------//
+
     }
 }
  //-----------------------------------------End of file------------------------------------//
