@@ -14,7 +14,8 @@ namespace RecipeApp
             rd.recipeIngredients();
             rd.recipeSteps();
             rd.printRecipeDetails();
-            rd.scaleRecipe();
+            //rd.scaleRecipe();
+            rd.clearData();
         }
     }
 }

@@ -91,6 +91,32 @@ namespace RecipeApp.Classes
                 printRecipeDetails();
             }
         }
+         //-----------------------------------------=========------------------------------------//
+        public void clearData()
+        {
+            Console.WriteLine("Do you want to clear the recipe? (yes/no)");
+            string clear = Console.ReadLine();
+            if (clear == "yes")
+            {
+                numIngredients = 0;
+                numSteps = 0;
+                ingredients = null;
+                steps = null;
+            }
+            Console.WriteLine("Recipe has been cleared");
+            Console.WriteLine("Do you want to enter a new recipe? (yes/no)");
+            string newRecipe = Console.ReadLine();
+            if (newRecipe == "yes")
+            {
+                recipeIngredients();
+                recipeSteps();
+                printRecipeDetails();
+                scaleRecipe();
+            }
+
+        }
+         //-----------------------------------------=========------------------------------------//
+
     }
 }
  //-----------------------------------------End of file------------------------------------//
