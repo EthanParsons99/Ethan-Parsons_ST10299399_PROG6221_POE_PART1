@@ -115,8 +115,26 @@ namespace RecipeApp.Classes
             }
 
         }
-         //-----------------------------------------=========------------------------------------//
-
+        //-----------------------------------------=========------------------------------------//
+        public void resetQauntity(int scaleBy)
+        {
+            Console.WriteLine("Do you want to reset the qauntity of the recipe? (yes/no)");
+            string reset = Console.ReadLine();
+            if (reset == "yes")
+            {
+                for (int i = 0; i < numIngredients; i++)
+                {
+                    string[] parts = ingredients[i].Split('-');
+                    string qauntity = parts[1].Trim();
+                    string[] qauntityParts = qauntity.Split(' ');
+                    string qauntityValue = qauntityParts[0];
+                    int newQauntity = Convert.ToInt32(qauntityValue) / scaleBy;
+                    ingredients[i] = $"{parts[0]} - {newQauntity} {qauntityParts[1]}";
+                }
+                Console.WriteLine("Recipe has been reset to original qauntity");
+                printRecipeDetails();
+            }
+        }
     }
 }
  //-----------------------------------------End of file------------------------------------//
