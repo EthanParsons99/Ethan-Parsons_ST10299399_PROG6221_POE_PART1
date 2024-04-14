@@ -165,16 +165,24 @@ namespace RecipeApp.Classes
                 numSteps = 0;
                 ingredients = null;
                 steps = null;
+                Console.WriteLine("Recipe has been cleared");
+                Console.WriteLine("Do you want to enter a new recipe? (yes/no)");
+                string newRecipe = Console.ReadLine();
+                if (newRecipe == "yes")
+                {
+                    recipeIngredients();
+                    recipeSteps();
+                    printRecipeDetails();
+                    scaleRecipe();
+                }
+                else if (newRecipe == "no")
+                {
+                    RecipeAppMenu();
+                }
             }
-            Console.WriteLine("Recipe has been cleared");
-            Console.WriteLine("Do you want to enter a new recipe? (yes/no)");
-            string newRecipe = Console.ReadLine();
-            if (newRecipe == "yes")
+            else if (clear == "no")
             {
-                recipeIngredients();
-                recipeSteps();
-                printRecipeDetails();
-                scaleRecipe();
+                RecipeAppMenu();
             }
 
         }
