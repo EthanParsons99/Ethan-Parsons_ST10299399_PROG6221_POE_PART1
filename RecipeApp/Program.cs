@@ -10,14 +10,8 @@ namespace RecipeApp
     {
         static void Main(string[] args)
         {
-            int scaleBy = 2;
             RecipeApp.Classes.RecipeDetails rd = new RecipeApp.Classes.RecipeDetails();
-            rd.recipeIngredients();
-            rd.recipeSteps();
-            rd.printRecipeDetails();
-            rd.scaleRecipe();
-            rd.resetQauntity(scaleBy);
-            rd.clearData();
+            rd.RecipeAppMenu();
         }
     }
 }

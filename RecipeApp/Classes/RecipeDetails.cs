@@ -17,7 +17,55 @@ namespace RecipeApp.Classes
         public int numSteps = 0;
         public string[] ingredients;
         public string[] steps;
- //-----------------------------------------=========------------------------------------//
+        private int scaleBy = 1;
+        //-----------------------------------------=========------------------------------------//
+        public void RecipeAppMenu()
+        {   
+            Console.WriteLine("Welcome to the Recipe App");
+            
+            Console.WriteLine("1. Enter a new recipe");
+            Console.WriteLine("2. Clear the recipe");
+            Console.WriteLine("3. Scale the recipe");
+            Console.WriteLine("4. Reset the qauntity of the recipe");
+            Console.WriteLine("5. Print the recipe details");
+            Console.WriteLine("6. Exit");
+            Console.WriteLine("Enter your choice: ");
+            int choice = Convert.ToInt32(Console.ReadLine());
+            switch (choice)
+            {
+                case 1:
+                    recipeIngredients();
+                    recipeSteps();
+                    printRecipeDetails();
+                    RecipeAppMenu();
+                    break;
+                case 2:
+                    clearData();
+                    RecipeAppMenu();
+                    break;
+                case 3:
+                    scaleBy = scaleRecipe();
+                    RecipeAppMenu();
+                    break;
+                case 4:
+                    resetQauntity(scaleBy);
+                    RecipeAppMenu();
+                    break;
+                case 5:
+                    printRecipeDetails();
+                    RecipeAppMenu();
+                    break;
+                case 6:
+                    Console.WriteLine("Thank you for using our app.Exiting the Recipe App");
+                    Environment.Exit(0);
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice");
+                    RecipeAppMenu();
+                    break;
+            }
+        }
+        //-----------------------------------------=========------------------------------------//
         public void recipeIngredients()
         {
             Console.Write("Enter the name of recipe: ");
@@ -69,7 +117,7 @@ namespace RecipeApp.Classes
             }
         }
         //-----------------------------------------=========------------------------------------//
-        public void scaleRecipe()
+        public int scaleRecipe()
         {
             Console.WriteLine("Do you want to scale the recipe? (yes/no)");
             string scale = Console.ReadLine();
@@ -89,7 +137,9 @@ namespace RecipeApp.Classes
                 }
                 Console.WriteLine("Recipe has been scaled by {0}", scaleBy);
                 printRecipeDetails();
+                return scaleBy;
             }
+            return 1;
         }
          //-----------------------------------------=========------------------------------------//
         public void clearData()
