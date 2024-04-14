@@ -73,18 +73,18 @@ namespace RecipeApp.Classes
         {
             Console.Write("Enter the name of recipe: ");
             string recipeName = Console.ReadLine();
-            Console.WriteLine("Enter the number of ingredients: ");
+            Console.Write("Enter the number of ingredients: ");
             numIngredients = Convert.ToInt32(Console.ReadLine());
             ingredients = new string[numIngredients];
 
 
             for (int i = 0; i < numIngredients; i++)
             {
-                Console.WriteLine("Enter the name ingredient: ");
+                Console.Write("Enter the name ingredient: ");
                 string ingredientName = Console.ReadLine();
-                Console.WriteLine("Enter the qauntity if ingrediant: ");
+                Console.Write("Enter the qauntity if ingrediant: ");
                 string ingredientQuantity = Console.ReadLine(); 
-                Console.WriteLine("Enter the unit of measurement: ");
+                Console.Write("Enter the unit of measurement: ");
                 string ingredientUnit = Console.ReadLine();
                 ingredients[i] = $"{ingredientName} - {ingredientQuantity} {ingredientUnit}";
             }
@@ -92,7 +92,7 @@ namespace RecipeApp.Classes
         //-----------------------------------------=========------------------------------------//
         public void recipeSteps()
         {
-            Console.WriteLine("Enter the number of steps for the recipe: ");
+            Console.Write("Enter the number of steps for the recipe: ");
             numSteps = Convert.ToInt32(Console.ReadLine());
             steps = new string[numSteps];
 
@@ -106,18 +106,20 @@ namespace RecipeApp.Classes
         //-----------------------------------------=========------------------------------------//
         public void printRecipeDetails()
         {
-            Console.WriteLine("Recipe Name: {0}", recipeName);
+            Console.WriteLine("***********************************");
             Console.WriteLine("Recipe Details: ");
+            Console.WriteLine("Recipe Name: {0}", recipeName);
             Console.WriteLine("Ingredients: ");
             foreach (string ingredient in ingredients)
             {
                 Console.WriteLine(ingredient);
             }
             Console.WriteLine("Steps: ");
-            foreach (string step in steps)
+            for(int i = 0; i < steps.Length; i++)
             {
-                Console.WriteLine(step);
+                Console.WriteLine($"Step {i + 1}: {steps[i]}");
             }
+            Console.WriteLine("***********************************");
         }
         //-----------------------------------------=========------------------------------------//
         public int scaleRecipe()
