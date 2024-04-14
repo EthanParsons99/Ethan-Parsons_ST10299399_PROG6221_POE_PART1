@@ -197,6 +197,10 @@ namespace RecipeApp.Classes
                 Console.WriteLine("Recipe has been reset to original qauntity");
                 printRecipeDetails();
             }
+            else if (reset == "no")
+            {
+                RecipeAppMenu();
+            }
         }
     }
 }
