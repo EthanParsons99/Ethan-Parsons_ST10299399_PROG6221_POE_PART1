@@ -21,9 +21,10 @@ namespace RecipeApp.Classes
         private int scaleBy = 1;
         //-----------------------------------------=========------------------------------------//
         public void RecipeAppMenu()
-        {   
-            Console.WriteLine("Welcome to the Recipe App");
-            Console.WriteLine("*****************************");
+        {
+            Console.WriteLine("******************************");
+            Console.WriteLine("Welcome to the Recipe App Menu");
+            Console.WriteLine("******************************");
 
             Console.WriteLine("Please select an option from the menu below of what you would like to do: ");
             Console.WriteLine("1. Enter a new recipe");
@@ -63,7 +64,7 @@ namespace RecipeApp.Classes
                     Environment.Exit(0);
                     break;
                 default:
-                    Console.WriteLine("Invalid choice");
+                    Console.WriteLine("Invalid choice!!! Please choose a new option.");
                     RecipeAppMenu();
                     break;
             }
@@ -106,8 +107,8 @@ namespace RecipeApp.Classes
         //-----------------------------------------=========------------------------------------//
         public void printRecipeDetails()
         {
-            Console.WriteLine("***********************************");
-            Console.WriteLine("Recipe Details: ");
+            Console.WriteLine("******************************");
+            Console.WriteLine("Recipe Details");
             Console.WriteLine("Recipe Name: {0}", recipeName);
             Console.WriteLine("Ingredients: ");
             foreach (string ingredient in ingredients)
@@ -119,7 +120,6 @@ namespace RecipeApp.Classes
             {
                 Console.WriteLine($"Step {i + 1}: {steps[i]}");
             }
-            Console.WriteLine("***********************************");
         }
         //-----------------------------------------=========------------------------------------//
         public int scaleRecipe()
@@ -130,11 +130,11 @@ namespace RecipeApp.Classes
                 RecipeAppMenu();
             }
 
-            Console.WriteLine("Are you sure you want to scale recipe? (yes/no)");
+            Console.Write("Are you sure you want to scale recipe? (yes/no) : ");
             string scale = Console.ReadLine();
             if (scale == "yes")
             {
-                Console.WriteLine("By how much should the ingrdients be scaled? : ");
+                Console.Write("By how much should the ingrdients be scaled? : ");
                 int scaleBy = Convert.ToInt32(Console.ReadLine());
 
                 for (int i = 0; i < numIngredients; i++)
@@ -159,7 +159,12 @@ namespace RecipeApp.Classes
          //-----------------------------------------=========------------------------------------//
         public void clearData()
         {
-            Console.WriteLine("Are you sure you want to clear the recipe? (yes/no)");
+            if (numIngredients == 0)
+            {
+                Console.WriteLine("Please add recipe details first !!!!");
+                RecipeAppMenu();
+            }
+            Console.Write("Are you sure you want to clear the recipe? (yes/no) : ");
             string clear = Console.ReadLine();
             if (clear == "yes")
             {
@@ -168,14 +173,13 @@ namespace RecipeApp.Classes
                 ingredients = null;
                 steps = null;
                 Console.WriteLine("Recipe has been cleared");
-                Console.WriteLine("Do you want to enter a new recipe? (yes/no)");
+                Console.Write("Do you want to enter a new recipe? (yes/no) : ");
                 string newRecipe = Console.ReadLine();
                 if (newRecipe == "yes")
                 {
                     recipeIngredients();
                     recipeSteps();
                     printRecipeDetails();
-                    scaleRecipe();
                 }
                 else if (newRecipe == "no")
                 {
@@ -191,6 +195,11 @@ namespace RecipeApp.Classes
         //-----------------------------------------=========------------------------------------//
         public void resetQauntity(int scaleBy)
         {
+            if (numIngredients == 0)
+            {
+                Console.WriteLine("Please add recipe details first !!!!");
+                RecipeAppMenu();
+            }
             Console.WriteLine("Do you want to reset the qauntity of the recipe? (yes/no)");
             string reset = Console.ReadLine();
             if (reset == "yes")
