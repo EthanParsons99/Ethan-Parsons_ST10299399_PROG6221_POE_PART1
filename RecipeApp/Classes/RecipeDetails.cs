@@ -108,6 +108,20 @@ namespace RecipeApp.Classes
                     string ingredientName = Console.ReadLine();
                     Console.Write("Enter the qauntity if ingrediant: ");
                     string ingredientQuantity = Console.ReadLine();
+                    try
+                    {
+                        int ingredientQauntity = Convert.ToInt32(ingredientQuantity);
+                    }
+                    catch (FormatException)
+                    {
+                        
+                        while (!int.TryParse(ingredientQuantity, out int n))
+                        {
+                            Console.WriteLine("Invalid input. Please enter a number for the qauntity of the ingredient.");
+                            Console.Write("Enter the qauntity if ingrediant: ");
+                            ingredientQuantity = Console.ReadLine();
+                        }
+                    }
                     Console.Write("Enter the unit of measurement: ");
                     string ingredientUnit = Console.ReadLine();
                     ingredients[i] = $"{ingredientName} - {ingredientQuantity} {ingredientUnit}";
