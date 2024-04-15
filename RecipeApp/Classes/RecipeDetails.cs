@@ -27,9 +27,11 @@ namespace RecipeApp.Classes
         /// </summary>
         public void RecipeAppMenu()
         {
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("******************************");
             Console.WriteLine("Welcome to the Recipe App Menu");
             Console.WriteLine("******************************");
+            Console.ResetColor();
 
             Console.WriteLine("Please select an option from the menu below of what you would like to do: ");
             Console.WriteLine("1. Enter a new recipe");
@@ -73,14 +75,18 @@ namespace RecipeApp.Classes
                         Environment.Exit(0);
                         break;
                     default:
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Invalid choice!!! Please choose a new option.");
+                        Console.ResetColor();
                         RecipeAppMenu();
                         break;
                 }
             }
             catch (FormatException)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Invalid choice!!! Please choose a new option.");
+                Console.ResetColor();
                 RecipeAppMenu();
             }
         }
@@ -117,7 +123,9 @@ namespace RecipeApp.Classes
                         
                         while (!int.TryParse(ingredientQuantity, out int n))
                         {
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Invalid input. Please enter a number for the qauntity of the ingredient.");
+                            Console.ResetColor();
                             Console.Write("Enter the qauntity if ingrediant: ");
                             ingredientQuantity = Console.ReadLine();
                         }
@@ -129,7 +137,9 @@ namespace RecipeApp.Classes
             }
             catch (FormatException)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Invalid input. Please enter a number for the number of ingredients.");
+                Console.ResetColor();
                 recipeIngredients();
             }
         }
@@ -157,7 +167,9 @@ namespace RecipeApp.Classes
             }
             catch (FormatException)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Invalid input. Please enter a number for the number of steps.");
+                Console.ResetColor();
                 recipeSteps();
             }
         }
@@ -168,7 +180,9 @@ namespace RecipeApp.Classes
         /// </summary>
         public void printRecipeDetails()
         {
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("******************************");
+            Console.ResetColor();
             Console.WriteLine("Recipe Details");
             Console.WriteLine("Recipe Name: {0}", recipeName);
             Console.WriteLine("Ingredients: ");
