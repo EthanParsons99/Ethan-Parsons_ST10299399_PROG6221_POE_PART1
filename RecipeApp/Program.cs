@@ -18,8 +18,8 @@ namespace RecipeApp
     {
         static void Main(string[] args)
         {
-            RecipeApp.Classes.RecipeDetails rd = new RecipeApp.Classes.RecipeDetails();
-            rd.RecipeAppMenu();
+            RecipeApp.Classes.RecipeDetails rd = new RecipeApp.Classes.RecipeDetails(); //Creating an object of the RecipeDetails class
+            rd.RecipeAppMenu(); //Calling the RecipeAppMenu method from the RecipeDetails class
         }
     }
 }

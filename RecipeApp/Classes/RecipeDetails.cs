@@ -7,7 +7,17 @@
 /// <summary> 
 /// Refrences
 /// 
+/// Troelsen, A. & Japikse, P., 2022. Pro C# 10 with .NET 6 Foundational Principles and Practices in Programming. 11th ed. USA: Apress.
+/// 
+///w3resource, 2024. w3resource. [Online]
+///Available at: https://www.w3resource.com/csharp-exercises/exception-handling/csharp-exception-handling-exercise-6.php
+///[Accessed 15 April 2024].
+///
+///Witscad, 2021.Witscad. [Online]
+///Available at: https://witscad.com/course/csharp-basics/chapter/string-manipulations
+///[Accessed 13 April 2024].
 /// </summary>
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,12 +28,12 @@ namespace RecipeApp.Classes
 {
     public class RecipeDetails
     {
-        public string recipeName;
-        public int numIngredients = 0;
-        public int numSteps = 0;
-        public string[] ingredients;
-        public string[] steps;
-        public double scaleBy = 1;
+        public string recipeName; // Declaring the variables to store the recipe details.
+        public int numIngredients = 0; // Declaring the variables to store the recipe details.
+        public int numSteps = 0; // Declaring the variables to store the recipe details.
+        public string[] ingredients; // Declaring the variables to store the recipe details.
+        public string[] steps; // Declaring the variables to store the recipe details.
+        public double scaleBy = 1; // Declaring the variables to store the recipe details.
 
         //-----------------------------------------Menu Method-----------------------------------//
         /// <summary>
@@ -56,30 +66,30 @@ namespace RecipeApp.Classes
                 switch (choice) // Switch case to handle the user choice.
                 {
                     case 1:
-                        recipeIngredients();
-                        recipeSteps();
-                        printRecipeDetails();
-                        RecipeAppMenu();
+                        recipeIngredients(); // Call the recipeIngredients method to enter the ingredients for the recipe.
+                        recipeSteps(); // Call the recipeSteps method to enter the steps for the recipe.
+                        printRecipeDetails(); // Call the printRecipeDetails method to print the recipe details.
+                        RecipeAppMenu(); // Call the RecipeAppMenu method to display the menu again.
                         break;
                     case 2:
-                        clearData();
-                        RecipeAppMenu();
+                        clearData(); // Call the clearData method to clear the recipe details.
+                        RecipeAppMenu(); // Call the RecipeAppMenu method to display the menu again.
                         break;
                     case 3:
-                        scaleBy = scaleRecipe();
-                        RecipeAppMenu();
+                        scaleBy = scaleRecipe(); // Call the scaleRecipe method to scale the recipe.
+                        RecipeAppMenu(); // Call the RecipeAppMenu method to display the menu again.
                         break;
                     case 4:
-                        resetQauntity(scaleBy);
-                        RecipeAppMenu();
+                        resetQauntity(scaleBy); // Call the resetQauntity method to reset the qauntity of the recipe.
+                        RecipeAppMenu(); // Call the RecipeAppMenu method to display the menu again.
                         break;
                     case 5:
-                        printRecipeDetails();
-                        RecipeAppMenu();
+                        printRecipeDetails(); // Call the printRecipeDetails method to print the recipe details.
+                        RecipeAppMenu(); // Call the RecipeAppMenu method to display the menu again.
                         break;
                     case 6:
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("Thank you for using our app.Exiting the Recipe App");
+                        Console.WriteLine("Thank you for using our app.Exiting the Recipe App"); // Output the message that the app is exiting.
                         Console.ResetColor();
                         Environment.Exit(0);
                         break;
@@ -119,8 +129,8 @@ namespace RecipeApp.Classes
             Console.Write("Enter the number of ingredients: "); // Prompt the user to enter the number of ingredients.
             try // Try catch block to handle exceptions. Will prompt the user to enter a new option if an invalid choice is entered.
             { 
-            numIngredients = Convert.ToInt32(Console.ReadLine());
-            ingredients = new string[numIngredients];
+            numIngredients = Convert.ToInt32(Console.ReadLine()); // Store the number of ingredients entered by the user.
+            ingredients = new string[numIngredients]; // Create an array to store the ingredients.
 
                 
                 for (int i = 0; i < numIngredients; i++) // Loop to enter the name, qauntity and unit of measurement for each ingredient.
@@ -176,14 +186,14 @@ namespace RecipeApp.Classes
             Console.Write("Enter the number of steps for the recipe: "); // Prompt the user to enter the number of steps for the recipe.
             try // Try catch block to handle exceptions. Will prompt the user to enter a new option if an invalid choice is entered.
             {
-                numSteps = Convert.ToInt32(Console.ReadLine());
-                steps = new string[numSteps];
+                numSteps = Convert.ToInt32(Console.ReadLine()); // Store the number of steps entered by the user.
+                steps = new string[numSteps]; // Create an array to store the steps.
 
                 for (int i = 0; i < numSteps; i++) // Loop to enter each step for the recipe.
                 {
                     Console.WriteLine("Enter the step: "); // Prompt the user to enter the step.
-                    string step = Console.ReadLine();
-                    steps[i] = step;
+                    string step = Console.ReadLine(); // Store the step in an array.
+                    steps[i] = step; // Store the step in an array.
                 }
             }
             catch (FormatException) // If the user enters an invalid choice, they will be prompted to enter a new option.
