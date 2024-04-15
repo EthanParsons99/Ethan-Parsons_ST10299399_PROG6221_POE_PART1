@@ -20,6 +20,11 @@ namespace RecipeApp.Classes
         public string[] steps;
         private int scaleBy = 1;
         //-----------------------------------------=========------------------------------------//
+        /// <summary>
+        /// In this method, the user is presented with a menu of options to choose from. 
+        /// The user can choose to enter a new recipe, clear the recipe, scale the recipe, 
+        /// reset the qauntity of the recipe, print the recipe details or exit the app.
+        /// </summary>
         public void RecipeAppMenu()
         {
             Console.WriteLine("******************************");
@@ -70,6 +75,12 @@ namespace RecipeApp.Classes
             }
         }
         //-----------------------------------------=========------------------------------------//
+        /// <summary>
+        /// This method is used to enter the ingredients for the recipe.
+        /// The user will be prompted to enter the name of the recipe and the number of ingredients.
+        /// The user will then be prompted to enter the name, qauntity and unit of measurement for each ingredient.
+        /// The ingredients get stored in an array.
+        /// </summary>
         public void recipeIngredients()
         {
             Console.Write("Enter the name of recipe: ");
@@ -91,6 +102,12 @@ namespace RecipeApp.Classes
             }
         }
         //-----------------------------------------=========------------------------------------//
+        /// <summary>
+        /// This method is used to enter the steps for the recipe.
+        /// The user will be prompted to enter the number of steps for the recipe.
+        /// After entering the number of steps, the user will be prompted to enter each step.
+        /// The steps get stored in an array.
+        /// </summary>
         public void recipeSteps()
         {
             Console.Write("Enter the number of steps for the recipe: ");
@@ -105,6 +122,10 @@ namespace RecipeApp.Classes
             }
         }
         //-----------------------------------------=========------------------------------------//
+        /// <summary>
+        /// This method is used to print the recipe details.
+        /// The method will print the recipe name, ingredients and steps.
+        /// </summary>
         public void printRecipeDetails()
         {
             Console.WriteLine("******************************");
@@ -122,6 +143,12 @@ namespace RecipeApp.Classes
             }
         }
         //-----------------------------------------=========------------------------------------//
+        /// <summary>
+        /// This method is used to scale the recipe by the qauntity entered by the user.
+        /// If there is no recipe details entered, the user will be prompted to enter recipe details first.
+        /// If the user chooses to scale the recipe, they will be prompted to enter the qauntity by which they want to scale the recipe.
+        /// if the user chooses not to scale the recipe, they will be taken back to the main menu.
+        /// </summary>
         public int scaleRecipe()
         {
             if (numIngredients == 0)
@@ -157,6 +184,13 @@ namespace RecipeApp.Classes
             return 1;
         }
          //-----------------------------------------=========------------------------------------//
+         /// <summary>
+         /// This method is used to clear the recipe details. And then prompts the user to enter a new recipe.
+         /// If the user chooses to enter a new recipe, they will be prompted to enter the recipe details.
+         /// if the user chooses not to enter a new recipe, they will be taken back to the main menu.
+         /// If there are no recipe details entered, the user will be prompted to enter recipe details first.
+         /// if the user chooses not to clear the recipe, they will be taken back to the main menu.
+         /// </summary>
         public void clearData()
         {
             if (numIngredients == 0)
@@ -193,6 +227,14 @@ namespace RecipeApp.Classes
 
         }
         //-----------------------------------------=========------------------------------------//
+        /// <summary>
+        /// This method is used to reset the qauntity of the recipe to the origanal values enterd at the beginning by user.
+        /// This is done by dividing the qauntity of the ingredients by the scaleBy value.
+        /// That was entered by the user when they scaled the recipe.
+        /// This method will only work if the user has already scaled the recipe. Otherwise it will just output the same recipe.
+        /// If no recipe details have been entered, the user will be prompted to enter recipe details first.
+        /// If the user chooses not to reset the qauntity, they will be taken back to the main menu.
+        /// </summary>
         public void resetQauntity(int scaleBy)
         {
             if (numIngredients == 0)
