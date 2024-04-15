@@ -39,39 +39,49 @@ namespace RecipeApp.Classes
             Console.WriteLine("5. Print the recipe details");
             Console.WriteLine("6. Exit");
             Console.Write("Enter your choice: ");
-            int choice = Convert.ToInt32(Console.ReadLine());
-            switch (choice)
+
+            try
             {
-                case 1:
-                    recipeIngredients();
-                    recipeSteps();
-                    printRecipeDetails();
-                    RecipeAppMenu();
-                    break;
-                case 2:
-                    clearData();
-                    RecipeAppMenu();
-                    break;
-                case 3:
-                    scaleBy = scaleRecipe();
-                    RecipeAppMenu();
-                    break;
-                case 4:
-                    resetQauntity(scaleBy);
-                    RecipeAppMenu();
-                    break;
-                case 5:
-                    printRecipeDetails();
-                    RecipeAppMenu();
-                    break;
-                case 6:
-                    Console.WriteLine("Thank you for using our app.Exiting the Recipe App");
-                    Environment.Exit(0);
-                    break;
-                default:
-                    Console.WriteLine("Invalid choice!!! Please choose a new option.");
-                    RecipeAppMenu();
-                    break;
+                int choice = Convert.ToInt32(Console.ReadLine());
+
+                switch (choice)
+                {
+                    case 1:
+                        recipeIngredients();
+                        recipeSteps();
+                        printRecipeDetails();
+                        RecipeAppMenu();
+                        break;
+                    case 2:
+                        clearData();
+                        RecipeAppMenu();
+                        break;
+                    case 3:
+                        scaleBy = scaleRecipe();
+                        RecipeAppMenu();
+                        break;
+                    case 4:
+                        resetQauntity(scaleBy);
+                        RecipeAppMenu();
+                        break;
+                    case 5:
+                        printRecipeDetails();
+                        RecipeAppMenu();
+                        break;
+                    case 6:
+                        Console.WriteLine("Thank you for using our app.Exiting the Recipe App");
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice!!! Please choose a new option.");
+                        RecipeAppMenu();
+                        break;
+                }
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid choice!!! Please choose a new option.");
+                RecipeAppMenu();
             }
         }
         //-----------------------------------------=========------------------------------------//
