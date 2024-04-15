@@ -96,19 +96,27 @@ namespace RecipeApp.Classes
             Console.Write("Enter the name of recipe: ");
             string recipeName = Console.ReadLine();
             Console.Write("Enter the number of ingredients: ");
+            try 
+            { 
             numIngredients = Convert.ToInt32(Console.ReadLine());
             ingredients = new string[numIngredients];
 
 
-            for (int i = 0; i < numIngredients; i++)
+                for (int i = 0; i < numIngredients; i++)
+                {
+                    Console.Write("Enter the name ingredient: ");
+                    string ingredientName = Console.ReadLine();
+                    Console.Write("Enter the qauntity if ingrediant: ");
+                    string ingredientQuantity = Console.ReadLine();
+                    Console.Write("Enter the unit of measurement: ");
+                    string ingredientUnit = Console.ReadLine();
+                    ingredients[i] = $"{ingredientName} - {ingredientQuantity} {ingredientUnit}";
+                }
+            }
+            catch (FormatException)
             {
-                Console.Write("Enter the name ingredient: ");
-                string ingredientName = Console.ReadLine();
-                Console.Write("Enter the qauntity if ingrediant: ");
-                string ingredientQuantity = Console.ReadLine(); 
-                Console.Write("Enter the unit of measurement: ");
-                string ingredientUnit = Console.ReadLine();
-                ingredients[i] = $"{ingredientName} - {ingredientQuantity} {ingredientUnit}";
+                Console.WriteLine("Invalid input. Please enter a number for the number of ingredients.");
+                recipeIngredients();
             }
         }
         //-----------------------------------------=========------------------------------------//
