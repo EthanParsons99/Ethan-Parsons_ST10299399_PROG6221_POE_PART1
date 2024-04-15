@@ -22,3 +22,5 @@ How the project works
 
 This is what my part one of the project can do.
 
+Link to github repository 
+https://github.com/EthanParsons99/Ethan-Parsons_ST10299399_PROG6221_POE_PART1.git 
