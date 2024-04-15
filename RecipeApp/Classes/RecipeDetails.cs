@@ -129,14 +129,22 @@ namespace RecipeApp.Classes
         public void recipeSteps()
         {
             Console.Write("Enter the number of steps for the recipe: ");
-            numSteps = Convert.ToInt32(Console.ReadLine());
-            steps = new string[numSteps];
-
-            for (int i = 0; i < numSteps; i++)
+            try
             {
-                Console.WriteLine("Enter the step: ");
-                string step = Console.ReadLine();
-                steps[i] = step;
+                numSteps = Convert.ToInt32(Console.ReadLine());
+                steps = new string[numSteps];
+
+                for (int i = 0; i < numSteps; i++)
+                {
+                    Console.WriteLine("Enter the step: ");
+                    string step = Console.ReadLine();
+                    steps[i] = step;
+                }
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid input. Please enter a number for the number of steps.");
+                recipeSteps();
             }
         }
         //-----------------------------------------=========------------------------------------//
