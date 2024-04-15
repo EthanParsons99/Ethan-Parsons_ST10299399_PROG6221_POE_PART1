@@ -16,6 +16,10 @@
 ///Witscad, 2021.Witscad. [Online]
 ///Available at: https://witscad.com/course/csharp-basics/chapter/string-manipulations
 ///[Accessed 13 April 2024].
+///
+/// Chand, M., 2018. C# Corner. [Online] 
+///Available at: https://www.c-sharpcorner.com/article/change-console-foreground-and-background-color-in-c-sharp/
+///[Accessed 15 April 2024].
 /// </summary>
 
 using System;
@@ -228,13 +232,20 @@ namespace RecipeApp.Classes
             Console.WriteLine("Recipe Details");
             Console.WriteLine("******************************");
             Console.ResetColor();
-            Console.WriteLine("Recipe Name: {0}", recipeName); // Print the recipe name.
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Recipe Name: "); // Print the recipe name.
+            Console.ResetColor();
+            Console.WriteLine(recipeName);
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Ingredients: ");
+            Console.ResetColor();
             foreach (string ingredient in ingredients) // Loop to print the ingredients.
             {
                 Console.WriteLine(ingredient);
             }
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Steps: ");
+            Console.ResetColor();
             for(int i = 0; i < steps.Length; i++) // Loop to print the steps.
             {
                 Console.WriteLine($"Step {i + 1}: {steps[i]}"); // Print the step number and the step.
