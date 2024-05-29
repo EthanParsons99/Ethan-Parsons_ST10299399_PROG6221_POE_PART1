@@ -54,10 +54,10 @@ namespace RecipeApp.Classes
                         printRecipeDetails(); // Call the printRecipeDetails method to print the recipe details.
                         RecipeAppMenu(); // Call the RecipeAppMenu method to display the menu again.
                         break;
-                    //case 2:
-                    //    clearData(); // Call the clearData method to clear the recipe details.
-                    //    RecipeAppMenu(); // Call the RecipeAppMenu method to display the menu again.
-                    //    break;
+                    case 2:
+                        clearData(); // Call the clearData method to clear the recipe details.
+                        RecipeAppMenu(); // Call the RecipeAppMenu method to display the menu again.
+                        break;
                     //case 3:
                     //    scaleBy = scaleRecipe(); // Call the scaleRecipe method to scale the recipe.
                     //    RecipeAppMenu(); // Call the RecipeAppMenu method to display the menu again.
@@ -138,6 +138,7 @@ namespace RecipeApp.Classes
                     Console.WriteLine($"Step {i + 1}: {recipe.Steps[i]}"); // Print the step number and the step.
                 }
             }
+        }
             //------------------------------------------End of method-----------------------------------------//
 
 
@@ -189,54 +190,42 @@ namespace RecipeApp.Classes
             ////------------------------------------------End of method-----------------------------------------//
 
 
-            ////-------------------------------------Clear data method------------------------------------//
-            ///// <summary>
-            ///// This method is used to clear the recipe details. And then prompts the user to enter a new recipe.
-            ///// If the user chooses to enter a new recipe, they will be prompted to enter the recipe details.
-            ///// if the user chooses not to enter a new recipe, they will be taken back to the main menu.
-            ///// If there are no recipe details entered, the user will be prompted to enter recipe details first.
-            ///// if the user chooses not to clear the recipe, they will be taken back to the main menu.
-            ///// </summary>
-            //public void clearData()
-            //{
-            //    if (numIngredients == 0) // If there are no recipe details entered, the user will be prompted to enter recipe details first.
-            //    {
-            //        Console.ForegroundColor = ConsoleColor.Red;
-            //        Console.WriteLine("Please add recipe details first !!!!");
-            //        Console.ResetColor();
-            //        RecipeAppMenu();
-            //    }
+            //-------------------------------------Clear data method------------------------------------//
+            /// <summary>
+            /// This method is used to clear the recipe details. And then prompts the user to enter a new recipe.
+            /// If the user chooses to enter a new recipe, they will be prompted to enter the recipe details.
+            /// if the user chooses not to enter a new recipe, they will be taken back to the main menu.
+            /// If there are no recipe details entered, the user will be prompted to enter recipe details first.
+            /// if the user chooses not to clear the recipe, they will be taken back to the main menu.
+            /// </summary>
 
-            //    Console.ForegroundColor = ConsoleColor.Red;
-            //    Console.Write("Are you sure you want to clear the recipe? (yes/no) : "); // Prompt the user to enter if they want to clear the recipe.
-            //    Console.ResetColor();
-            //    string clear = Console.ReadLine();
-            //    if (clear == "yes") // If the user chooses to clear the recipe, the recipe details will be cleared.
-            //    {
-            //        numIngredients = 0; // Clear the number of ingredients.
-            //        numSteps = 0; // Clear the number of steps.
-            //        ingredients = null; // Clear the ingredients.
-            //        steps = null; // Clear the steps.
-            //        Console.WriteLine("Recipe has been cleared");
-            //        Console.Write("Do you want to enter a new recipe? (yes/no) : "); // Prompt the user to enter if they want to enter a new recipe.
-            //        string newRecipe = Console.ReadLine();
-            //        if (newRecipe == "yes") // If the user chooses to enter a new recipe, they will be prompted to enter the recipe details.
-            //        {
-            //            recipeIngredients();
-            //            recipeSteps();
-            //            printRecipeDetails();
-            //        }
-            //        else if (newRecipe == "no") // If the user chooses not to enter a new recipe, they will be taken back to the main menu.
-            //        {
-            //            RecipeAppMenu();
-            //        }
-            //    }
-            //    else if (clear == "no") // If the user chooses not to clear the recipe, they will be taken back to the main menu.
-            //    {
-            //        RecipeAppMenu();
-            //    }
+            public void clearData()
+            {
 
-            //}
+                if (Recipes.Count == 0) // If there are no recipe details entered, the user will be prompted to enter recipe details first.
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Please add recipe details first !!!!");
+                    Console.ResetColor();
+                    RecipeAppMenu();
+                }
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("Are you sure you want to clear the recipe? (yes/no) : "); // Prompt the user to enter if they want to clear the recipe.
+                Console.ResetColor();
+                string clear = Console.ReadLine();
+                if (clear == "yes") // If the user chooses to clear the recipe, the recipe details will be cleared.
+                {
+                   Recipes.Clear();
+                   Console.WriteLine("Recipe has been cleared");
+                  
+                }
+                else if (clear == "no") // If the user chooses not to clear the recipe, they will be taken back to the main menu.
+                {
+                RecipeAppMenu();
+                }
+
+            }
             ////------------------------------------------End of method-----------------------------------------//
 
 
@@ -285,4 +274,4 @@ namespace RecipeApp.Classes
             //------------------------------------------End of method-----------------------------------------//
         }
     }
-}
+
