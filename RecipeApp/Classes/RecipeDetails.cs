@@ -32,29 +32,21 @@ namespace RecipeApp.Classes
 {
     public class RecipeDetails
     {
- 
-
-        //-----------------------------------------Ingredients Method------------------------------------//
-        /// <summary>
-        /// This method is used to enter the ingredients for the recipe.
-        /// The user will be prompted to enter the name of the recipe and the number of ingredients.
-        /// The user will then be prompted to enter the name, qauntity and unit of measurement for each ingredient.
-        /// The ingredients get stored in an array.
-        /// </summary>
-        public void recipeIngredients()
+        public Recipe AddRecipe()
         {
+            var newRecipe = new Recipe(); // Create a new recipe object.
+
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("******************************");
+            Console.WriteLine("******************************"); 
             Console.ResetColor();
             Console.Write("Enter the name of recipe: "); // Prompt the user to enter the name of the recipe.
-            recipeName = Console.ReadLine();
+            newRecipe.recipeName = Console.ReadLine();
+
             Console.Write("Enter the number of ingredients: "); // Prompt the user to enter the number of ingredients.
             try // Try catch block to handle exceptions. Will prompt the user to enter a new option if an invalid choice is entered.
-            { 
-            numIngredients = Convert.ToInt32(Console.ReadLine()); // Store the number of ingredients entered by the user.
-            ingredients = new string[numIngredients]; // Create an array to store the ingredients.
+            {
+                int numIngredients = Convert.ToInt32(Console.ReadLine()); // Store the number of ingredients entered by the user.
 
-                
                 for (int i = 0; i < numIngredients; i++) // Loop to enter the name, qauntity and unit of measurement for each ingredient.
                 {
                     Console.Write("Enter the name ingredient: "); // Prompt the user to enter the name of the ingredient.
@@ -67,7 +59,7 @@ namespace RecipeApp.Classes
                     }
                     catch (FormatException)
                     {
-                        
+
                         while (!int.TryParse(ingredientQuantity, out int n)) // Loop to check if the qauntity entered is a number.
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
@@ -82,7 +74,7 @@ namespace RecipeApp.Classes
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.WriteLine("******************************");
                     Console.ResetColor();
-                    ingredients[i] = $"{ingredientName} - {ingredientQuantity} {ingredientUnit}"; // Store the ingredient details in an array.
+                    newRecipe.ingredients.Add(new Ingredient(ingredientName, Convert.ToDouble(ingredientQuantity), ingredientUnit, 0, ""));
                 }
             }
             catch (FormatException)
@@ -90,32 +82,18 @@ namespace RecipeApp.Classes
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Invalid input. Please enter a number for the number of ingredients.");
                 Console.ResetColor();
-                recipeIngredients();
             }
-        }
-        //------------------------------------------End of method-----------------------------------------//
 
-
-        //------------------------------------------Steps Method-----------------------------------//
-        /// <summary>
-        /// This method is used to enter the steps for the recipe.
-        /// The user will be prompted to enter the number of steps for the recipe.
-        /// After entering the number of steps, the user will be prompted to enter each step.
-        /// The steps get stored in an array.
-        /// </summary>
-        public void recipeSteps()
-        {
             Console.Write("Enter the number of steps for the recipe: "); // Prompt the user to enter the number of steps for the recipe.
             try // Try catch block to handle exceptions. Will prompt the user to enter a new option if an invalid choice is entered.
             {
-                numSteps = Convert.ToInt32(Console.ReadLine()); // Store the number of steps entered by the user.
-                steps = new string[numSteps]; // Create an array to store the steps.
+                int numSteps = Convert.ToInt32(Console.ReadLine()); // Store the number of steps entered by the user.
 
                 for (int i = 0; i < numSteps; i++) // Loop to enter each step for the recipe.
                 {
                     Console.WriteLine("Enter the step: "); // Prompt the user to enter the step.
-                    string step = Console.ReadLine(); // Store the step in an array.
-                    steps[i] = step; // Store the step in an array.
+                    string step = Console.ReadLine(); // Store the step entered by the user.
+                    newRecipe.Steps.Add(step); // Add the step to the recipe.
                 }
             }
             catch (FormatException) // If the user enters an invalid choice, they will be prompted to enter a new option.
@@ -123,13 +101,11 @@ namespace RecipeApp.Classes
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Invalid input. Please enter a number for the number of steps.");
                 Console.ResetColor();
-                recipeSteps();
             }
+
+            return newRecipe;
         }
         //------------------------------------------End of method-----------------------------------------//
-
-
-      
     }
 }
  //-----------------------------------------End of file------------------------------------//
