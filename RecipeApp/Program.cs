@@ -3,6 +3,7 @@
 /// ST10299399
 /// PROG6221
 /// </summary>
+using RecipeApp.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +19,8 @@ namespace RecipeApp
     {
         static void Main(string[] args)
         {
-            RecipeApp.Classes.RecipeDetails rd = new RecipeApp.Classes.RecipeDetails(); //Creating an object of the RecipeDetails class
-            rd.RecipeAppMenu(); //Calling the RecipeAppMenu method from the RecipeDetails class
+            var startProgram = new RecipeMethods();
+            startProgram.RecipeAppMenu();
         }
     }
 }
