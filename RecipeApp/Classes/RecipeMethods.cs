@@ -263,7 +263,7 @@ namespace RecipeApp.Classes
                 Console.WriteLine($"{i + 1}. {Recipes[i].recipeName}");
             }
 
-            if (!int.TryParse(Console.ReadLine(), out int recipeNumber) && recipeNumber >= 1 && recipeNumber <= Recipes.Count)
+            if (!int.TryParse(Console.ReadLine(), out int recipeNumber) || recipeNumber < 1 || recipeNumber > Recipes.Count)
             {
                 Console.WriteLine("Invalid");
             }
@@ -272,9 +272,11 @@ namespace RecipeApp.Classes
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write("Are you sure you want to scale recipe? (yes/no) : "); // Prompt the user to enter if they want to scale the recipe.
             Console.ResetColor();
-            string scale = Console.ReadLine();
-            if (scale == "yes") // If the user chooses to scale the recipe, they will be prompted to enter the qauntity by which they want to scale the recipe.
+            string reset = Console.ReadLine();
+            if (reset == "yes") // If the user chooses to scale the recipe, they will be prompted to enter the qauntity by which they want to scale the recipe.
             {
+                Console.WriteLine("By how much was the recipe scaled?:");
+                double scaleBy = Convert.ToDouble(Console.ReadLine());
                 foreach (var ingredient in recipe.ingredients)
                 {
                     ingredient.Quantity /= scaleBy;
@@ -283,39 +285,7 @@ namespace RecipeApp.Classes
                 printRecipeDetails(recipe);
             }
         }
-        //public void resetQauntity(double scaleBy)
-        //{
-        //    if (numIngredients == 0) // If there are no recipe details entered, the user will be prompted to enter recipe details first.
-        //    {
-        //        Console.ForegroundColor = ConsoleColor.Red;
-        //        Console.WriteLine("Please add recipe details first !!!!");
-        //        Console.ResetColor();
-        //        RecipeAppMenu();
-        //    }
-
-        //    Console.ForegroundColor = ConsoleColor.Red;
-        //    Console.WriteLine("Are you sure you want to reset the qauntity of the recipe? (yes/no)"); // Prompt the user to enter if they want to reset the qauntity of the recipe.
-        //    Console.ResetColor();
-        //    string reset = Console.ReadLine();
-        //    if (reset == "yes") // If the user chooses to reset the qauntity of the recipe, the qauntity of the ingredients will be reset to the original values.
-        //    {
-        //        for (int i = 0; i < numIngredients; i++) // Loop to reset the qauntity of the ingredients.
-        //        {
-        //            string[] parts = ingredients[i].Split('-'); // Split the ingredient details to get the qauntity.
-        //            string qauntity = parts[1].Trim(); // Trim the qauntity to remove any white spaces.
-        //            string[] qauntityParts = qauntity.Split(' '); // Split the qauntity to get the qauntity value and unit of measurement.
-        //            string qauntityValue = qauntityParts[0]; // Get the qauntity value.
-        //            double newQauntity = Convert.ToDouble(qauntityValue) / scaleBy; // Reset the qauntity to the original value by deviding with scaleBy.
-        //            ingredients[i] = $"{parts[0]} - {newQauntity} {qauntityParts[1]}"; // Store the new qauntity in the ingredients array.
-        //        }
-        //        Console.WriteLine("Recipe has been reset to original qauntity"); // Output the message that the recipe has been reset.
-        //        printRecipeDetails();
-        //    }
-        //    else if (reset == "no") // If the user chooses not to reset the qauntity of the recipe, they will be taken back to the main menu.
-        //    {
-        //        RecipeAppMenu();
-        //    }
-        //}
+       
         //------------------------------------------End of method-----------------------------------------//
     }
 }
