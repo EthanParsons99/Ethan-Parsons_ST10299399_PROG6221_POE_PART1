@@ -32,12 +32,7 @@ namespace RecipeApp.Classes
 {
     public class RecipeDetails
     {
-        public string recipeName; // Declaring the variables to store the recipe details.
-        public int numIngredients = 0; // Declaring the variables to store the recipe details.
-        public int numSteps = 0; // Declaring the variables to store the recipe details.
-        public string[] ingredients; // Declaring the variables to store the recipe details.
-        public string[] steps; // Declaring the variables to store the recipe details.
-        public double scaleBy = 1; // Declaring the variables to store the recipe details.
+ 
 
         //-----------------------------------------Ingredients Method------------------------------------//
         /// <summary>
