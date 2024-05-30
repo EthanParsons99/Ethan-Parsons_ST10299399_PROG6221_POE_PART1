@@ -1,4 +1,9 @@
-﻿using System;
+﻿/// <summary>
+/// Ethan Parsons
+/// ST10299399
+/// PROG6221
+/// </summary>
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

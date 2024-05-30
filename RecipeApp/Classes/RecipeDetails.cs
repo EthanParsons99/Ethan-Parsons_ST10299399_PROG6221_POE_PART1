@@ -23,24 +23,25 @@
 /// </summary>
 
 using System;
-using System.Collections.Generic;
+using System.Collections.Generic; // Import the namespace System.Collections.Generic.
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
  //-----------------------------------------=========------------------------------------//
 namespace RecipeApp.Classes
 {
-    public class RecipeDetails
+    public class RecipeDetails // Class to add a new recipe to the recipe list.
     {
-        public Recipe AddRecipe()
+        public Recipe AddRecipe() // Method to add a new recipe to the recipe list.
         {
             var newRecipe = new Recipe(); // Create a new recipe object.
 
-            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = ConsoleColor.Cyan; // Change the console text color to cyan.
             Console.WriteLine("******************************"); 
-            Console.ResetColor();
+            Console.ResetColor(); // Reset the console text color to the default color.
             Console.Write("Enter the name of recipe: "); // Prompt the user to enter the name of the recipe.
-            newRecipe.recipeName = Console.ReadLine();
+            newRecipe.recipeName = Console.ReadLine(); // Store the name of the recipe entered by the user.
+
 
             Console.Write("Enter the number of ingredients: "); // Prompt the user to enter the number of ingredients.
             try // Try catch block to handle exceptions. Will prompt the user to enter a new option if an invalid choice is entered.
@@ -50,57 +51,57 @@ namespace RecipeApp.Classes
                 for (int i = 0; i < numIngredients; i++) // Loop to enter the name, qauntity and unit of measurement for each ingredient.
                 {
                     Console.Write("Enter the name ingredient: "); // Prompt the user to enter the name of the ingredient.
-                    string ingredientName = Console.ReadLine();
+                    string ingredientName = Console.ReadLine(); // Store the name of the ingredient entered by the user.
                     Console.Write("Enter the qauntity if ingrediant: "); // Prompt the user to enter the qauntity of the ingredient.
-                    string ingredientQuantity = Console.ReadLine();
+                    string ingredientQuantity = Console.ReadLine(); // Store the qauntity of the ingredient entered by the user.
                     try // Try catch block to handle exceptions. Will prompt the user to enter a new option if an invalid choice is entered.
                     {
-                        int ingredientQauntity = Convert.ToInt32(ingredientQuantity);
+                        int ingredientQauntity = Convert.ToInt32(ingredientQuantity); // Store the qauntity of the ingredient entered by the user.
                     }
-                    catch (FormatException)
+                    catch (FormatException) // If the user enters an invalid choice, they will be prompted to enter a new option.
                     {
 
                         while (!int.TryParse(ingredientQuantity, out int n)) // Loop to check if the qauntity entered is a number.
                         {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("Invalid input. Please enter a number for the qauntity of the ingredient.");
-                            Console.ResetColor();
-                            Console.Write("Enter the qauntity if ingrediant: ");
-                            ingredientQuantity = Console.ReadLine();
+                            Console.ForegroundColor = ConsoleColor.Red; // Change the console text color to red.
+                            Console.WriteLine("Invalid input. Please enter a number for the qauntity of the ingredient."); // Display an error message.
+                            Console.ResetColor(); // Reset the console text color to the default color.
+                            Console.Write("Enter the qauntity if ingrediant: "); // Prompt the user to enter the qauntity of the ingredient.
+                            ingredientQuantity = Console.ReadLine(); // Store the qauntity of the ingredient entered by the user.
                         }
                     }
                     Console.Write("Enter the unit of measurement: "); // Prompt the user to enter the unit of measurement for the ingredient.
-                    string ingredientUnit = Console.ReadLine();
+                    string ingredientUnit = Console.ReadLine(); // Store the unit of measurement entered by the user.
                     Console.Write("Enter the calories of the ingredient: "); // Prompt the user to enter the calories of the ingredient.
-                    string ingredientCalories = Console.ReadLine();
+                    string ingredientCalories = Console.ReadLine(); // Store the calories of the ingredient entered by the user.
                     try // Try catch block to handle exceptions. Will prompt the user to enter a new option if an invalid choice is entered.
                     {
-                        int ingredientCaloriesInt = Convert.ToInt32(ingredientCalories);
+                        int ingredientCaloriesInt = Convert.ToInt32(ingredientCalories); // Store the calories of the ingredient entered by the user.
                     }
-                    catch (FormatException)
+                    catch (FormatException) // If the user enters an invalid choice, they will be prompted to enter a new option.
                     {
                         while (!int.TryParse(ingredientCalories, out int n)) // Loop to check if the calories entered is a number.
                         {
-                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.ForegroundColor = ConsoleColor.Red; // Change the console text color to red.
                             Console.WriteLine("Invalid input. Please enter a number for the calories of the ingredient.");
-                            Console.ResetColor();
-                            Console.Write("Enter the calories of the ingredient: ");
-                            ingredientCalories = Console.ReadLine();
+                            Console.ResetColor(); // Reset the console text color to the default color.
+                            Console.Write("Enter the calories of the ingredient: "); // Prompt the user to enter the calories of the ingredient.
+                            ingredientCalories = Console.ReadLine(); // Store the calories of the ingredient entered by the user.
                         }
                     }
                     Console.Write("Enter the food group of the ingredient: "); // Prompt the user to enter the food group of the ingredient.
-                    string ingredientFoodGroup = Console.ReadLine();
-                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    string ingredientFoodGroup = Console.ReadLine(); // Store the food group of the ingredient entered by the user.
+                    Console.ForegroundColor = ConsoleColor.Cyan; // Change the console text color to cyan.
                     Console.WriteLine("******************************");
-                    Console.ResetColor();
-                    newRecipe.ingredients.Add(new Ingredient(ingredientName, Convert.ToDouble(ingredientQuantity), ingredientUnit, Convert.ToDouble(ingredientCalories), ingredientFoodGroup));
+                    Console.ResetColor(); // Reset the console text color to the default color.
+                    newRecipe.ingredients.Add(new Ingredient(ingredientName, Convert.ToDouble(ingredientQuantity), ingredientUnit, Convert.ToDouble(ingredientCalories), ingredientFoodGroup)); // Add the ingredient to the recipe.
                 }
             }
-            catch (FormatException)
+            catch (FormatException) // If the user enters an invalid choice, they will be prompted to enter a new option.
             {
-                Console.ForegroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.Red; // Change the console text color to red.
                 Console.WriteLine("Invalid input. Please enter a number for the number of ingredients.");
-                Console.ResetColor();
+                Console.ResetColor(); // Reset the console text color to the default color.
             }
 
             Console.Write("Enter the number of steps for the recipe: "); // Prompt the user to enter the number of steps for the recipe.
@@ -117,12 +118,12 @@ namespace RecipeApp.Classes
             }
             catch (FormatException) // If the user enters an invalid choice, they will be prompted to enter a new option.
             {
-                Console.ForegroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.Red; // Change the console text color to red.
                 Console.WriteLine("Invalid input. Please enter a number for the number of steps.");
-                Console.ResetColor();
+                Console.ResetColor(); // Reset the console text color to the default color.
             }
 
-            return newRecipe;
+            return newRecipe; // Return the new recipe.
         }
         //------------------------------------------End of method-----------------------------------------//
     }
