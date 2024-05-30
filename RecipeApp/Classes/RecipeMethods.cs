@@ -25,13 +25,15 @@ namespace RecipeApp.Classes
         /// </summary>
         public void RecipeAppMenu()
         {
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            // This is the output display of the menu
+            // This is the output for the heading of the menu
+            Console.ForegroundColor = ConsoleColor.Cyan; // Changes the colour of text
             Console.WriteLine("******************************");
             Console.WriteLine("Welcome to the Recipe App Menu");
             Console.WriteLine("******************************");
-            Console.ResetColor();
+            Console.ResetColor(); // Resets the colour text 
 
+
+            // This is the output of the menu and how it would look like
             Console.WriteLine("Please select an option from the menu below: ");
             Console.WriteLine("1. Enter a new recipe");
             Console.WriteLine("2. Clear the recipe");
@@ -43,9 +45,11 @@ namespace RecipeApp.Classes
             Console.WriteLine("8. Exit");
             Console.Write("Enter your choice: ");
 
+
+
             try // Try catch block to handle exceptions. Will prompt the user to enter a new option if an invalid choice is entered.
             {
-                int choice = Convert.ToInt32(Console.ReadLine());
+                int choice = Convert.ToInt32(Console.ReadLine()); // Prompt the user to enter a choice from the menu.
 
                 switch (choice) // Switch case to handle the user choice.
                 {
@@ -73,12 +77,12 @@ namespace RecipeApp.Classes
                         RecipeAppMenu(); // Call the RecipeAppMenu method to display the menu again.
                         break;
                     case 6:
-                        sortRecipes();
-                        RecipeAppMenu();
-                        break;
+                        sortRecipes(); // Call the sortRecipes method to sort the recipes by name.
+                        RecipeAppMenu(); // Call the RecipeAppMenu method to display the menu again.
+                        break; 
                     case 7:
-                        selectRecipe();
-                        RecipeAppMenu();
+                        selectRecipe(); // Call the selectRecipe method to select a recipe.
+                        RecipeAppMenu(); // Call the RecipeAppMenu method to display the menu again.
                         break;
                     case 8:
                         Console.ForegroundColor = ConsoleColor.Green;
@@ -104,11 +108,11 @@ namespace RecipeApp.Classes
         }
         //------------------------------------------End of method-----------------------------------------//
 
-        public void printAllRecipeDetails()
+        public void printAllRecipeDetails() // Method to print all the recipe details
         {
-            foreach (var recipe in Recipes)
+            foreach (var recipe in Recipes) // Loop to print all the recipe details
             {
-                printRecipeDetails(recipe);
+                printRecipeDetails(recipe); // Call the printRecipeDetails method to print the recipe details.
             }
         }
 
@@ -117,55 +121,55 @@ namespace RecipeApp.Classes
         /// This method is used to print the recipe details.
         /// The method will print the recipe name, ingredients and steps.
         /// </summary>
-        public void printRecipeDetails(Recipe recipe)
+        public void printRecipeDetails(Recipe recipe) // Method to print the recipe details
         {
             if (Recipes.Count == 0) // If there are no recipe details entered, the user will be prompted to enter recipe details first.
             {
-                Console.ForegroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.Red; // Changes the colour of text
                 Console.WriteLine("Please add recipe details first !!!!");
-                Console.ResetColor();
-                RecipeAppMenu();
+                Console.ResetColor(); // Resets the colour text
+                RecipeAppMenu(); // Call the RecipeAppMenu method to display the menu again.
             }
 
             // Output the recipe details
-            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = ConsoleColor.Cyan; // Changes the colour of text
+            Console.WriteLine("******************************"); 
+            Console.WriteLine("Recipe Details"); // Output the message that the recipe details are being printed.
             Console.WriteLine("******************************");
-            Console.WriteLine("Recipe Details");
-            Console.WriteLine("******************************");
-            Console.ResetColor();
+            Console.ResetColor(); // Resets the colour text
 
             
             
-                Console.ForegroundColor = ConsoleColor.Green;
+                Console.ForegroundColor = ConsoleColor.Green; // Changes the colour of text
                 Console.WriteLine($"Recipe Name: {recipe.recipeName}"); // Print the recipe name.
-                Console.ResetColor();
+                Console.ResetColor(); // Resets the colour text
 
-                double totalCalories = calculateCalories(recipe);
-                if(totalCalories > 300)
+                double totalCalories = calculateCalories(recipe); // Calculate the total calories of the recipe.
+                if(totalCalories > 300) // If the total calories are over 300, the total calories will be printed in red.
                 { 
-                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.Red; // Changes the colour of text
                     Console.WriteLine($"Warning the total Calories are over 300: {totalCalories} calories"); // Print the total calories.
-                    Console.ResetColor();
+                    Console.ResetColor(); // Resets the colour text
                 }
-                else
+                else // If the total calories are less than 300, the total calories will be printed in green.
                 {
-                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.ForegroundColor = ConsoleColor.Green; // Changes the colour of text
                     Console.WriteLine($"Total Calories: {totalCalories}"); // Print the total calories.
-                    Console.ResetColor();
+                    Console.ResetColor(); // Resets the colour text
                 }
 
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Ingredients: ");
-                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.Green; // Changes the colour of text
+                Console.WriteLine("Ingredients: "); // Print the ingredients.
+                Console.ResetColor(); // Resets the colour text
                 foreach (var ingredient in recipe.ingredients) // Loop to print the ingredients.
                 {
-                    Console.WriteLine(ingredient);
+                    Console.WriteLine(ingredient); // Print the ingredients.
                 }
 
 
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Steps: ");
-                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.Green; // Changes the colour of text
+                Console.WriteLine("Steps: "); // Print the steps.
+                Console.ResetColor(); // Resets the colour text
                 for (int i = 0; i < recipe.Steps.Count; i++) // Loop to print the steps.
                 {
                     Console.WriteLine($"Step {i + 1}: {recipe.Steps[i]}"); // Print the step number and the step.
@@ -182,43 +186,43 @@ namespace RecipeApp.Classes
         /// If the user chooses to scale the recipe, they will be prompted to enter the qauntity by which they want to scale the recipe.
         /// if the user chooses not to scale the recipe, they will be taken back to the main menu.
         /// </summary>
-        public void scaleRecipe()
+        public void scaleRecipe() // Method to scale the recipe
         {
-            if (Recipes.Count == 0)
+            if (Recipes.Count == 0) // If there are no recipe details entered, the user will be prompted to enter recipe details first.
             {
-                Console.ForegroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.Red; // Changes the colour of text
                 Console.WriteLine("Please add recipe details first !!!!");
-                Console.ResetColor();
-                RecipeAppMenu();
+                Console.ResetColor(); // Resets the colour text
+                RecipeAppMenu(); // Call the RecipeAppMenu method to display the menu again.
             }
 
-            Console.WriteLine("Enter the number of the recipe you want to select:");
-            for (int i = 0; i < Recipes.Count; i++)
+            Console.WriteLine("Enter the number of the recipe you want to select:"); // Output the message to enter the number of the recipe to scale the qauntity.
+            for (int i = 0; i < Recipes.Count; i++) // Loop to print the recipe names.
             {
-                Console.WriteLine($"{i + 1}. {Recipes[i].recipeName}");
+                Console.WriteLine($"{i + 1}. {Recipes[i].recipeName}"); // Print the recipe number and the recipe name.
             }
 
-            if (!int.TryParse(Console.ReadLine(), out int recipeNumber) && recipeNumber >= 1 && recipeNumber <= Recipes.Count)
+            if (!int.TryParse(Console.ReadLine(), out int recipeNumber) && recipeNumber >= 1 && recipeNumber <= Recipes.Count) // If the user enters an invalid recipe number, they will be prompted to enter a new recipe number.
             {
-                Console.WriteLine("Invalid");
+                Console.WriteLine("Invalid"); // Output the message that the selection is invalid.
             }
-            Recipe recipe = Recipes[recipeNumber - 1];
+            Recipe recipe = Recipes[recipeNumber - 1]; // Select the recipe to scale the qauntity.
 
-            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Red; // Changes the colour of text
             Console.Write("Are you sure you want to scale recipe? (yes/no) : "); // Prompt the user to enter if they want to scale the recipe.
-            Console.ResetColor();
-            string scale = Console.ReadLine();
+            Console.ResetColor(); // Resets the colour text
+            string scale = Console.ReadLine(); // Prompt the user to enter if they want to scale the recipe.
             if (scale == "yes") // If the user chooses to scale the recipe, they will be prompted to enter the qauntity by which they want to scale the recipe.
             {
-                Console.WriteLine("By how much should it be scaled:");
-                double scaleBy = Convert.ToDouble(Console.ReadLine());
+                Console.WriteLine("By how much should it be scaled:"); // Prompt the user to enter the qauntity by which they want to scale the recipe.
+                double scaleBy = Convert.ToDouble(Console.ReadLine()); // Prompt the user to enter the qauntity by which they want to scale the recipe.
 
-                foreach (var ingredient in recipe.ingredients)
+                foreach (var ingredient in recipe.ingredients) // Loop to scale the qauntity of the ingredients.
                 {
-                    ingredient.Quantity *= scaleBy;
+                    ingredient.Quantity *= scaleBy; // Scale the qauntity of the ingredients by multiplying the qauntity by the scaleBy value.
                 }
                 Console.WriteLine($"Recipe has been scaled by {scaleBy}"); // Output the message that the recipe has been scaled.
-                printRecipeDetails(recipe);
+                printRecipeDetails(recipe); // Call the printRecipeDetails method to print the recipe details.
             }
         }
             ////------------------------------------------End of method-----------------------------------------//
@@ -233,30 +237,30 @@ namespace RecipeApp.Classes
             /// if the user chooses not to clear the recipe, they will be taken back to the main menu.
             /// </summary>
 
-            public void clearData()
+            public void clearData() // Method to clear the recipe details
             {
 
                 if (Recipes.Count == 0) // If there are no recipe details entered, the user will be prompted to enter recipe details first.
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Please add recipe details first !!!!");
-                    Console.ResetColor();
-                    RecipeAppMenu();
+                    Console.ForegroundColor = ConsoleColor.Red; // Changes the colour of text
+                    Console.WriteLine("Please add recipe details first !!!!"); // Output the message to enter recipe details first.
+                    Console.ResetColor(); // Resets the colour text
+                    RecipeAppMenu(); // Call the RecipeAppMenu method to display the menu again.
                 }
 
-                Console.ForegroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.Red; // Changes the colour of text
                 Console.Write("Are you sure you want to clear the recipe? (yes/no) : "); // Prompt the user to enter if they want to clear the recipe.
-                Console.ResetColor();
-                string clear = Console.ReadLine();
+                Console.ResetColor(); // Resets the colour text
+                string clear = Console.ReadLine(); // Prompt the user to enter if they want to clear the recipe.
                 if (clear == "yes") // If the user chooses to clear the recipe, the recipe details will be cleared.
                 {
-                   Recipes.Clear();
-                   Console.WriteLine("Recipe has been cleared");
+                   Recipes.Clear(); // Clear the recipe details.
+                   Console.WriteLine("Recipe has been cleared"); // Output the message that the recipe has been cleared.
                   
                 }
                 else if (clear == "no") // If the user chooses not to clear the recipe, they will be taken back to the main menu.
                 {
-                RecipeAppMenu();
+                RecipeAppMenu(); // Call the RecipeAppMenu method to display the menu again.
                 }
 
             }
@@ -273,91 +277,91 @@ namespace RecipeApp.Classes
         /// If the user chooses not to reset the qauntity, they will be taken back to the main menu.
         /// </summary>
         /// 
-        public void resetQauntity()
+        public void resetQauntity() // Method to reset the qauntity of the recipe
         {
-            if (Recipes.Count == 0)
+            if (Recipes.Count == 0) // If there are no recipe details entered, the user will be prompted to enter recipe details first.
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Please add recipe details first !!!!");
-                Console.ResetColor();
-                RecipeAppMenu();
+                Console.ForegroundColor = ConsoleColor.Red; // Changes the colour of text
+                Console.WriteLine("Please add recipe details first !!!!"); 
+                Console.ResetColor(); // Resets the colour text
+                RecipeAppMenu(); // Call the RecipeAppMenu method to display the menu again.
             }
 
-            Console.WriteLine("Enter the number of the recipe you want to select:");
-            for (int i = 0; i < Recipes.Count; i++)
+            Console.WriteLine("Enter the number of the recipe you want to select:"); // Output the message to enter the number of the recipe to reset the qauntity.
+            for (int i = 0; i < Recipes.Count; i++) // Loop to print the recipe names.  
             {
-                Console.WriteLine($"{i + 1}. {Recipes[i].recipeName}");
+                Console.WriteLine($"{i + 1}. {Recipes[i].recipeName}"); // Print the recipe number and the recipe name.
             }
 
-            if (!int.TryParse(Console.ReadLine(), out int recipeNumber) || recipeNumber < 1 || recipeNumber > Recipes.Count)
+            if (!int.TryParse(Console.ReadLine(), out int recipeNumber) || recipeNumber < 1 || recipeNumber > Recipes.Count) // If the user enters an invalid recipe number, they will be prompted to enter a new recipe number.
             {
-                Console.WriteLine("Invalid");
+                Console.WriteLine("Invalid"); // Output the message that the selection is invalid.  
             }
-            Recipe recipe = Recipes[recipeNumber - 1];
+            Recipe recipe = Recipes[recipeNumber - 1]; // Select the recipe to reset the qauntity.
 
-            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Red; // Changes the colour of text
             Console.Write("Are you sure you want to scale recipe? (yes/no) : "); // Prompt the user to enter if they want to scale the recipe.
-            Console.ResetColor();
-            string reset = Console.ReadLine();
+            Console.ResetColor(); // Resets the colour text
+            string reset = Console.ReadLine(); // Prompt the user to enter if they want to scale the recipe.
             if (reset == "yes") // If the user chooses to scale the recipe, they will be prompted to enter the qauntity by which they want to scale the recipe.
             {
-                Console.WriteLine("By how much was the recipe scaled?:");
-                double scaleBy = Convert.ToDouble(Console.ReadLine());
-                foreach (var ingredient in recipe.ingredients)
+                Console.WriteLine("By how much was the recipe scaled?:"); // Prompt the user to enter the qauntity by which they want to scale the recipe.
+                double scaleBy = Convert.ToDouble(Console.ReadLine()); // Prompt the user to enter the qauntity by which they want to scale the recipe.
+                foreach (var ingredient in recipe.ingredients) // Loop to reset the qauntity of the ingredients.
                 {
-                    ingredient.Quantity /= scaleBy;
+                    ingredient.Quantity /= scaleBy; // Reset the qauntity of the ingredients by dividing the qauntity by the scaleBy value.
                 }
                 Console.WriteLine($"Recipe has been scaled by {scaleBy}"); // Output the message that the recipe has been scaled.
-                printRecipeDetails(recipe);
+                printRecipeDetails(recipe); // Call the printRecipeDetails method to print the recipe details.
             }
         }
 
-        public double calculateCalories(Recipe recipe)
+        public double calculateCalories(Recipe recipe) // Method to calculate the total calories of the recipe
         {
-            double totalCalories = 0;
-            foreach (var ingredient in recipe.ingredients)
+            double totalCalories = 0; // Initialize the total calories to 0
+            foreach (var ingredient in recipe.ingredients) // Loop to calculate the total calories
             {
-                totalCalories += ingredient.Calories * ingredient.Quantity;
+                totalCalories += ingredient.Calories * ingredient.Quantity; // Calculate the total calories
             }
-            return totalCalories;
+            return totalCalories; // Return the total calories
         }
 
-        public void sortRecipes()
+        public void sortRecipes() // Method to sort the recipes by name
         {
-            if(Recipes.Count == 0)
+            if(Recipes.Count == 0) // If there are no recipe details entered, the user will be prompted to enter recipe details first.
             {
-                Console.ForegroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.Red; // Changes the colour of text
                 Console.WriteLine("Please add recipe details first !!!!");
-                Console.ResetColor();
-                RecipeAppMenu();
+                Console.ResetColor(); // Resets the colour text
+                RecipeAppMenu(); // Call the RecipeAppMenu method to display the menu again.
             }
-            Recipes.Sort((x, y) => x.recipeName.CompareTo(y.recipeName));
-            Console.WriteLine("Recipes have been sorted by name");
+            Recipes.Sort((x, y) => x.recipeName.CompareTo(y.recipeName)); // Sort the recipes by name
+            Console.WriteLine("Recipes have been sorted by name"); // Output the message that the recipes have been sorted.
         }
 
-        public void selectRecipe()
+        public void selectRecipe() // Method to select a recipe
         {
-            if(Recipes.Count == 0)
+            if(Recipes.Count == 0) // If there are no recipe details entered, the user will be prompted to enter recipe details first.
             {
-                Console.ForegroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.Red; // Changes the colour of text
                 Console.WriteLine("Please add recipe details first !!!!");
-                Console.ResetColor();
-                RecipeAppMenu();
+                Console.ResetColor(); // Resets the colour text
+                RecipeAppMenu(); // Call the RecipeAppMenu method to display the menu again.
             }
 
-            Console.WriteLine("Enter the number of the recipe you want to select:");
-            for (int i = 0; i < Recipes.Count; i++)
+            Console.WriteLine("Enter the number of the recipe you want to select:"); // Output the message to enter the number of the recipe to select.
+            for (int i = 0; i < Recipes.Count; i++) // Loop to print the recipe names.
             {
-                Console.WriteLine($"{i + 1}. {Recipes[i].recipeName}");
+                Console.WriteLine($"{i + 1}. {Recipes[i].recipeName}"); // Print the recipe number and the recipe name.
             }
 
-            if (int.TryParse(Console.ReadLine(), out int recipeNumber) && recipeNumber >= 1 && recipeNumber <= Recipes.Count)
+            if (int.TryParse(Console.ReadLine(), out int recipeNumber) && recipeNumber >= 1 && recipeNumber <= Recipes.Count) // If the user enters a valid recipe number, the recipe details will be printed.
             {
-                printRecipeDetails(Recipes[recipeNumber - 1]);
+                printRecipeDetails(Recipes[recipeNumber - 1]); // Call the printRecipeDetails method to print the recipe details.
             }
-            else
+            else // If the user enters an invalid recipe number, they will be prompted to enter a new recipe number.
             {
-                Console.WriteLine("Invalid selection")
+                Console.WriteLine("Invalid selection"); // Output the message that the selection is invalid.
             }
         }
        

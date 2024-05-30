@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RecipeApp.Classes
 {
-    public class Recipe
+    public class Recipe 
     {
         public string recipeName { get; set; } // Property to store the name of the recipe.
         public List<Ingredient> ingredients { get; set; } // Property to store the ingredients of the recipe.
