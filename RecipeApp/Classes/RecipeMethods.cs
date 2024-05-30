@@ -285,6 +285,16 @@ namespace RecipeApp.Classes
                 printRecipeDetails(recipe);
             }
         }
+
+        public double calculateCalories(Recipe recipe)
+        {
+            double totalCalories = 0;
+            foreach (var ingredient in recipe.ingredients)
+            {
+                totalCalories += ingredient.Calories * ingredient.Quantity;
+            }
+            return totalCalories;
+        }
        
         //------------------------------------------End of method-----------------------------------------//
     }

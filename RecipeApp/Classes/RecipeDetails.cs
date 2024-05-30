@@ -71,10 +71,29 @@ namespace RecipeApp.Classes
                     }
                     Console.Write("Enter the unit of measurement: "); // Prompt the user to enter the unit of measurement for the ingredient.
                     string ingredientUnit = Console.ReadLine();
+                    Console.Write("Enter the calories of the ingredient: "); // Prompt the user to enter the calories of the ingredient.
+                    string ingredientCalories = Console.ReadLine();
+                    try // Try catch block to handle exceptions. Will prompt the user to enter a new option if an invalid choice is entered.
+                    {
+                        int ingredientCaloriesInt = Convert.ToInt32(ingredientCalories);
+                    }
+                    catch (FormatException)
+                    {
+                        while (!int.TryParse(ingredientCalories, out int n)) // Loop to check if the calories entered is a number.
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Invalid input. Please enter a number for the calories of the ingredient.");
+                            Console.ResetColor();
+                            Console.Write("Enter the calories of the ingredient: ");
+                            ingredientCalories = Console.ReadLine();
+                        }
+                    }
+                    Console.Write("Enter the food group of the ingredient: "); // Prompt the user to enter the food group of the ingredient.
+                    string ingredientFoodGroup = Console.ReadLine();
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.WriteLine("******************************");
                     Console.ResetColor();
-                    newRecipe.ingredients.Add(new Ingredient(ingredientName, Convert.ToDouble(ingredientQuantity), ingredientUnit, 0, ""));
+                    newRecipe.ingredients.Add(new Ingredient(ingredientName, Convert.ToDouble(ingredientQuantity), ingredientUnit, Convert.ToDouble(ingredientCalories), ingredientFoodGroup));
                 }
             }
             catch (FormatException)
