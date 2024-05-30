@@ -4,24 +4,6 @@
 /// PROG6221
 /// </summary>
 
-/// <summary> 
-/// Refrences
-/// 
-/// Troelsen, A. & Japikse, P., 2022. Pro C# 10 with .NET 6 Foundational Principles and Practices in Programming. 11th ed. USA: Apress.
-/// 
-///w3resource, 2024. w3resource. [Online]
-///Available at: https://www.w3resource.com/csharp-exercises/exception-handling/csharp-exception-handling-exercise-6.php
-///[Accessed 15 April 2024].
-///
-///Witscad, 2021.Witscad. [Online]
-///Available at: https://witscad.com/course/csharp-basics/chapter/string-manipulations
-///[Accessed 13 April 2024].
-///
-/// Chand, M., 2018. C# Corner. [Online] 
-///Available at: https://www.c-sharpcorner.com/article/change-console-foreground-and-background-color-in-c-sharp/
-///[Accessed 15 April 2024].
-/// </summary>
-
 using System;
 using System.Collections.Generic; // Import the namespace System.Collections.Generic.
 using System.Linq;
@@ -62,8 +44,12 @@ namespace RecipeApp.Classes
                 {
                     Console.Write("Enter the name ingredient: "); // Prompt the user to enter the name of the ingredient.
                     string ingredientName = Console.ReadLine(); // Store the name of the ingredient entered by the user.
+
+
                     Console.Write("Enter the qauntity if ingrediant: "); // Prompt the user to enter the qauntity of the ingredient.
                     string ingredientQuantity = Console.ReadLine(); // Store the qauntity of the ingredient entered by the user.
+
+
                     try // Try catch block to handle exceptions. Will prompt the user to enter a new option if an invalid choice is entered.
                     {
                         int ingredientQauntity = Convert.ToInt32(ingredientQuantity); // Store the qauntity of the ingredient entered by the user.
@@ -80,8 +66,12 @@ namespace RecipeApp.Classes
                             ingredientQuantity = Console.ReadLine(); // Store the qauntity of the ingredient entered by the user.
                         }
                     }
+
+
                     Console.Write("Enter the unit of measurement: "); // Prompt the user to enter the unit of measurement for the ingredient.
                     string ingredientUnit = Console.ReadLine(); // Store the unit of measurement entered by the user.
+
+
                     Console.Write("Enter the calories of the ingredient: "); // Prompt the user to enter the calories of the ingredient.
                     string ingredientCalories = Console.ReadLine(); // Store the calories of the ingredient entered by the user.
                     try // Try catch block to handle exceptions. Will prompt the user to enter a new option if an invalid choice is entered.
@@ -99,15 +89,18 @@ namespace RecipeApp.Classes
                             ingredientCalories = Console.ReadLine(); // Store the calories of the ingredient entered by the user.
                         }
                     }
+
                     Console.Write("Enter the food group of the ingredient: "); // Prompt the user to enter the food group of the ingredient.
                     string ingredientFoodGroup = Console.ReadLine(); // Store the food group of the ingredient entered by the user.
+
+
                     Console.ForegroundColor = ConsoleColor.Cyan; // Change the console text color to cyan.
                     Console.WriteLine("******************************");
                     Console.ResetColor(); // Reset the console text color to the default color.
                     newRecipe.ingredients.Add(new Ingredient(ingredientName, Convert.ToDouble(ingredientQuantity), ingredientUnit, Convert.ToDouble(ingredientCalories), ingredientFoodGroup)); // Add the ingredient to the recipe.
                 }
             
-           int numSteps; // Variable to store the number of steps.
+            int numSteps; // Variable to store the number of steps.
             while (true) // Loop to check if the number of steps entered is a number.
             {
                 Console.Write("Enter the number of steps for the recipe: "); // Prompt the user to enter the number of steps for the recipe.

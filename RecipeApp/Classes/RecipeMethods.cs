@@ -95,7 +95,7 @@ namespace RecipeApp.Classes
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("Thank you for using our app.Exiting the Recipe App"); // Output the message that the app is exiting.
                         Console.ResetColor();
-                        Environment.Exit(0);
+                        Environment.Exit(0); // Exit the app.
                         break;
                     default: // If the user enters an invalid choice, they will be prompted to enter a new option.
                         Console.ForegroundColor = ConsoleColor.Red;
@@ -144,21 +144,21 @@ namespace RecipeApp.Classes
         /// </summary>
         public void printRecipeDetails(Recipe recipe) // Method to print the recipe details
         {
-            if (Recipes.Count == 0) // If there are no recipe details entered, the user will be prompted to enter recipe details first.
-            {
-                Console.ForegroundColor = ConsoleColor.Red; // Changes the colour of text
-                Console.WriteLine("Please add recipe details first !!!!");
+                if (Recipes.Count == 0) // If there are no recipe details entered, the user will be prompted to enter recipe details first.
+                {
+                    Console.ForegroundColor = ConsoleColor.Red; // Changes the colour of text
+                    Console.WriteLine("Please add recipe details first !!!!");
+                    Console.ResetColor(); // Resets the colour text
+                    RecipeAppMenu(); // Call the RecipeAppMenu method to display the menu again.
+                }
+
+
+                // Output the recipe details
+                Console.ForegroundColor = ConsoleColor.Cyan; // Changes the colour of text
+                Console.WriteLine("******************************"); 
+                Console.WriteLine("Recipe Details"); // Output the message that the recipe details are being printed.
+                Console.WriteLine("******************************");
                 Console.ResetColor(); // Resets the colour text
-                RecipeAppMenu(); // Call the RecipeAppMenu method to display the menu again.
-            }
-
-
-            // Output the recipe details
-            Console.ForegroundColor = ConsoleColor.Cyan; // Changes the colour of text
-            Console.WriteLine("******************************"); 
-            Console.WriteLine("Recipe Details"); // Output the message that the recipe details are being printed.
-            Console.WriteLine("******************************");
-            Console.ResetColor(); // Resets the colour text
 
             
             
@@ -401,6 +401,9 @@ namespace RecipeApp.Classes
 
 
         //-------------------------------------Calculate Calories Method------------------------------------//
+        /// <summary>
+        /// This method is used to calculate the total calories of the recipe.
+        /// </summary>
         public event CalorieDelegate CalorieEvent; // Event to calculate the total calories of the recipe.
 
         public double calculateCalories(Recipe recipe) // Method to calculate the total calories of the recipe
@@ -424,6 +427,9 @@ namespace RecipeApp.Classes
 
 
         //-------------------------------------Sort Recipes Method------------------------------------//
+        /// <summary>
+        /// This method sort the recipes in alphabetical order
+        /// </summary>
         public void sortRecipes() // Method to sort the recipes by name
         {
             if(Recipes.Count == 0) // If there are no recipe details entered, the user will be prompted to enter recipe details first.
@@ -446,6 +452,9 @@ namespace RecipeApp.Classes
 
 
         //-------------------------------------Select Recipe Method------------------------------------//
+        /// <summary>
+        /// This method allows you to select a recipe from the list of recipes
+        /// </summary>
         public void selectRecipe() // Method to select a recipe
         {
             if(Recipes.Count == 0) // If there are no recipe details entered, the user will be prompted to enter recipe details first.

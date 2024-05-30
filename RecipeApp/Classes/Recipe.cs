@@ -3,6 +3,7 @@
 /// ST10299399
 /// PROG6221
 /// </summary>
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace RecipeApp.Classes
 {
-    public class Recipe 
+    public class Recipe // Class to store the details of a recipe.
     {
         public string recipeName { get; set; } // Property to store the name of the recipe.
         public List<Ingredient> ingredients { get; set; } // Property to store the ingredients of the recipe.
