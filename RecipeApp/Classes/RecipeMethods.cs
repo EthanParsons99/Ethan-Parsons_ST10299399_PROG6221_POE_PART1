@@ -129,7 +129,21 @@ namespace RecipeApp.Classes
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine($"Recipe Name: {recipe.recipeName}"); // Print the recipe name.
                 Console.ResetColor();
-                //Console.WriteLine(recipe.recipeName);
+
+                double totalCalories = calculateCalories(recipe);
+                if(totalCalories > 300)
+                { 
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"Warning the total Calories are over 300: {totalCalories} calories"); // Print the total calories.
+                    Console.ResetColor();
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($"Total Calories: {totalCalories}"); // Print the total calories.
+                    Console.ResetColor();
+                }
+
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Ingredients: ");
                 Console.ResetColor();
@@ -137,6 +151,8 @@ namespace RecipeApp.Classes
                 {
                     Console.WriteLine(ingredient);
                 }
+
+
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Steps: ");
                 Console.ResetColor();
