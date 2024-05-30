@@ -39,7 +39,8 @@ namespace RecipeApp.Classes
             Console.WriteLine("4. Reset the qauntity of the recipe");
             Console.WriteLine("5. Print the recipe details");
             Console.WriteLine("6. Sort Recipes");
-            Console.WriteLine("7. Exit");
+            Console.WriteLine("7. Select Recipe");
+            Console.WriteLine("8. Exit");
             Console.Write("Enter your choice: ");
 
             try // Try catch block to handle exceptions. Will prompt the user to enter a new option if an invalid choice is entered.
@@ -76,6 +77,10 @@ namespace RecipeApp.Classes
                         RecipeAppMenu();
                         break;
                     case 7:
+                        selectRecipe();
+                        RecipeAppMenu();
+                        break;
+                    case 8:
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("Thank you for using our app.Exiting the Recipe App"); // Output the message that the app is exiting.
                         Console.ResetColor();
@@ -328,6 +333,32 @@ namespace RecipeApp.Classes
             }
             Recipes.Sort((x, y) => x.recipeName.CompareTo(y.recipeName));
             Console.WriteLine("Recipes have been sorted by name");
+        }
+
+        public void selectRecipe()
+        {
+            if(Recipes.Count == 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Please add recipe details first !!!!");
+                Console.ResetColor();
+                RecipeAppMenu();
+            }
+
+            Console.WriteLine("Enter the number of the recipe you want to select:");
+            for (int i = 0; i < Recipes.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {Recipes[i].recipeName}");
+            }
+
+            if (int.TryParse(Console.ReadLine(), out int recipeNumber) && recipeNumber >= 1 && recipeNumber <= Recipes.Count)
+            {
+                printRecipeDetails(Recipes[recipeNumber - 1]);
+            }
+            else
+            {
+                Console.WriteLine("Invalid selection")
+            }
         }
        
         //------------------------------------------End of method-----------------------------------------//
