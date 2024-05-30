@@ -42,11 +42,21 @@ namespace RecipeApp.Classes
             Console.Write("Enter the name of recipe: "); // Prompt the user to enter the name of the recipe.
             newRecipe.recipeName = Console.ReadLine(); // Store the name of the recipe entered by the user.
 
-
-            Console.Write("Enter the number of ingredients: "); // Prompt the user to enter the number of ingredients.
-            try // Try catch block to handle exceptions. Will prompt the user to enter a new option if an invalid choice is entered.
+            int numIngredients; // Variable to store the number of ingredients.
+            while (true) // Loop to check if the number of ingredients entered is a number.
             {
-                int numIngredients = Convert.ToInt32(Console.ReadLine()); // Store the number of ingredients entered by the user.
+                Console.Write("Enter the number of ingredients: "); // Prompt the user to enter the number of ingredients.
+                if (!int.TryParse(Console.ReadLine(), out numIngredients)) // Loop to check if the number of ingredients entered is a number.
+                {
+                    Console.ForegroundColor = ConsoleColor.Red; // Change the console text color to red.
+                    Console.WriteLine("Invalid input. Please enter a number for the number of ingredients."); // Display an error message.
+                    Console.ResetColor(); // Reset the console text color to the default color.
+                }
+                else // If the number of ingredients entered is a number, break out of the loop.
+                {
+                    break; // Break out of the loop.
+                }
+            }
 
                 for (int i = 0; i < numIngredients; i++) // Loop to enter the name, qauntity and unit of measurement for each ingredient.
                 {
@@ -96,34 +106,29 @@ namespace RecipeApp.Classes
                     Console.ResetColor(); // Reset the console text color to the default color.
                     newRecipe.ingredients.Add(new Ingredient(ingredientName, Convert.ToDouble(ingredientQuantity), ingredientUnit, Convert.ToDouble(ingredientCalories), ingredientFoodGroup)); // Add the ingredient to the recipe.
                 }
-            }
-            catch (FormatException) // If the user enters an invalid choice, they will be prompted to enter a new option.
+            
+           int numSteps; // Variable to store the number of steps.
+            while (true) // Loop to check if the number of steps entered is a number.
             {
-                Console.ForegroundColor = ConsoleColor.Red; // Change the console text color to red.
-                Console.WriteLine("Invalid input. Please enter a number for the number of ingredients.");
-                Console.ResetColor(); // Reset the console text color to the default color.
-            }
-
-            Console.Write("Enter the number of steps for the recipe: "); // Prompt the user to enter the number of steps for the recipe.
-            try // Try catch block to handle exceptions. Will prompt the user to enter a new option if an invalid choice is entered.
-            {
-                int numSteps = Convert.ToInt32(Console.ReadLine()); // Store the number of steps entered by the user.
-
+                Console.Write("Enter the number of steps for the recipe: "); // Prompt the user to enter the number of steps for the recipe.
+                if (!int.TryParse(Console.ReadLine(), out numSteps)) // Loop to check if the number of steps entered is a number.
+                {
+                    Console.ForegroundColor = ConsoleColor.Red; // Change the console text color to red.
+                    Console.WriteLine("Invalid input. Please enter a number for the number of steps."); // Display an error message.
+                    Console.ResetColor(); // Reset the console text color to the default color.
+                }
+                else // If the number of steps entered is a number, break out of the loop.
+                {
+                    break; // Break out of the loop.
+                }
+            }              
                 for (int i = 0; i < numSteps; i++) // Loop to enter each step for the recipe.
                 {
-                    Console.WriteLine("Enter the step: "); // Prompt the user to enter the step.
-                    string step = Console.ReadLine(); // Store the step entered by the user.
-                    newRecipe.Steps.Add(step); // Add the step to the recipe.
+                        Console.WriteLine("Enter the step: "); // Prompt the user to enter the step.
+                        string step = Console.ReadLine(); // Store the step entered by the user.
+                        newRecipe.Steps.Add(step); // Add the step to the recipe.
                 }
-            }
-            catch (FormatException) // If the user enters an invalid choice, they will be prompted to enter a new option.
-            {
-                Console.ForegroundColor = ConsoleColor.Red; // Change the console text color to red.
-                Console.WriteLine("Invalid input. Please enter a number for the number of steps.");
-                Console.ResetColor(); // Reset the console text color to the default color.
-            }
-
-            return newRecipe; // Return the new recipe.
+                return newRecipe; // Return the new recipe.
         }
         //------------------------------------------End of method-----------------------------------------//
     }

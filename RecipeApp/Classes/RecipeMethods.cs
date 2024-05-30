@@ -198,42 +198,64 @@ namespace RecipeApp.Classes
         /// </summary>
         public void scaleRecipe() // Method to scale the recipe
         {
-            if (Recipes.Count == 0) // If there are no recipe details entered, the user will be prompted to enter recipe details first.
+            try
+            {
+                if (Recipes.Count == 0) // If there are no recipe details entered, the user will be prompted to enter recipe details first.
+                {
+                    Console.ForegroundColor = ConsoleColor.Red; // Changes the colour of text
+                    Console.WriteLine("Please add recipe details first !!!!");
+                    Console.ResetColor(); // Resets the colour text
+                    RecipeAppMenu(); // Call the RecipeAppMenu method to display the menu again.
+                }
+
+                Console.WriteLine("Enter the number of the recipe you want to select:"); // Output the message to enter the number of the recipe to scale the qauntity.
+                for (int i = 0; i < Recipes.Count; i++) // Loop to print the recipe names.
+                {
+                    Console.WriteLine($"{i + 1}. {Recipes[i].recipeName}"); // Print the recipe number and the recipe name.
+                }
+
+
+                if (!int.TryParse(Console.ReadLine(), out int recipeNumber) || recipeNumber < 1 || recipeNumber > Recipes.Count) // If the user enters an invalid recipe number, they will be prompted to enter a new recipe number.
+                {
+                    Console.ForegroundColor = ConsoleColor.Red; // Changes the colour of text
+                    Console.WriteLine("Invalid option try again !!!"); // Output the message that the selection is invalid.
+                    Console.ResetColor(); // Resets the colour text
+                    RecipeAppMenu();// Call the RecipeAppMenu method to display the menu again.
+                    return;
+                }
+
+
+                Recipe recipe = Recipes[recipeNumber - 1]; // Select the recipe to scale the qauntity.
+
+
+                Console.ForegroundColor = ConsoleColor.Red; // Changes the colour of text
+                Console.Write("Are you sure you want to scale recipe? (yes/no) : "); // Prompt the user to enter if they want to scale the recipe.
+                Console.ResetColor(); // Resets the colour text
+                string scale = Console.ReadLine(); // Prompt the user to enter if they want to scale the recipe.
+                if (scale == "yes") // If the user chooses to scale the recipe, they will be prompted to enter the qauntity by which they want to scale the recipe.
+                {
+                    Console.WriteLine("By how much should it be scaled:"); // Prompt the user to enter the qauntity by which they want to scale the recipe.
+                    double scaleBy = Convert.ToDouble(Console.ReadLine()); // Prompt the user to enter the qauntity by which they want to scale the recipe.
+
+                    foreach (var ingredient in recipe.ingredients) // Loop to scale the qauntity of the ingredients.
+                    {
+                        ingredient.Quantity *= scaleBy; // Scale the qauntity of the ingredients by multiplying the qauntity by the scaleBy value.
+                    }
+
+                    Console.WriteLine($"Recipe has been scaled by {scaleBy}"); // Output the message that the recipe has been scaled.
+                    printRecipeDetails(recipe); // Call the printRecipeDetails method to print the recipe details.
+                }
+                else if (scale == "no") // If the user chooses not to scale the recipe, they will be taken back to the main menu.
+                {
+                    RecipeAppMenu(); // Call the RecipeAppMenu method to display the menu again.
+                }
+            }
+            catch (FormatException) // If the user enters an invalid choice, they will be prompted to enter a new option.
             {
                 Console.ForegroundColor = ConsoleColor.Red; // Changes the colour of text
-                Console.WriteLine("Please add recipe details first !!!!");
+                Console.WriteLine("Invalid choice!!! Please enter a number for your option."); // Output the message that the selection is invalid.
                 Console.ResetColor(); // Resets the colour text
                 RecipeAppMenu(); // Call the RecipeAppMenu method to display the menu again.
-            }
-
-            Console.WriteLine("Enter the number of the recipe you want to select:"); // Output the message to enter the number of the recipe to scale the qauntity.
-            for (int i = 0; i < Recipes.Count; i++) // Loop to print the recipe names.
-            {
-                Console.WriteLine($"{i + 1}. {Recipes[i].recipeName}"); // Print the recipe number and the recipe name.
-            }
-
-
-            if (!int.TryParse(Console.ReadLine(), out int recipeNumber) && recipeNumber >= 1 && recipeNumber <= Recipes.Count) // If the user enters an invalid recipe number, they will be prompted to enter a new recipe number.
-            {
-                Console.WriteLine("Invalid"); // Output the message that the selection is invalid.
-            }
-
-            Recipe recipe = Recipes[recipeNumber - 1]; // Select the recipe to scale the qauntity.
-            Console.ForegroundColor = ConsoleColor.Red; // Changes the colour of text
-            Console.Write("Are you sure you want to scale recipe? (yes/no) : "); // Prompt the user to enter if they want to scale the recipe.
-            Console.ResetColor(); // Resets the colour text
-            string scale = Console.ReadLine(); // Prompt the user to enter if they want to scale the recipe.
-            if (scale == "yes") // If the user chooses to scale the recipe, they will be prompted to enter the qauntity by which they want to scale the recipe.
-            {
-                Console.WriteLine("By how much should it be scaled:"); // Prompt the user to enter the qauntity by which they want to scale the recipe.
-                double scaleBy = Convert.ToDouble(Console.ReadLine()); // Prompt the user to enter the qauntity by which they want to scale the recipe.
-
-                foreach (var ingredient in recipe.ingredients) // Loop to scale the qauntity of the ingredients.
-                {
-                    ingredient.Quantity *= scaleBy; // Scale the qauntity of the ingredients by multiplying the qauntity by the scaleBy value.
-                }
-                Console.WriteLine($"Recipe has been scaled by {scaleBy}"); // Output the message that the recipe has been scaled.
-                printRecipeDetails(recipe); // Call the printRecipeDetails method to print the recipe details.
             }
         }
             ////------------------------------------------End of method-----------------------------------------//
