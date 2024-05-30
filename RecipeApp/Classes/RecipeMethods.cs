@@ -38,7 +38,8 @@ namespace RecipeApp.Classes
             Console.WriteLine("3. Scale the recipe");
             Console.WriteLine("4. Reset the qauntity of the recipe");
             Console.WriteLine("5. Print the recipe details");
-            Console.WriteLine("6. Exit");
+            Console.WriteLine("6. Sort Recipes");
+            Console.WriteLine("7. Exit");
             Console.Write("Enter your choice: ");
 
             try // Try catch block to handle exceptions. Will prompt the user to enter a new option if an invalid choice is entered.
@@ -71,6 +72,10 @@ namespace RecipeApp.Classes
                         RecipeAppMenu(); // Call the RecipeAppMenu method to display the menu again.
                         break;
                     case 6:
+                        sortRecipes();
+                        RecipeAppMenu();
+                        break;
+                    case 7:
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("Thank you for using our app.Exiting the Recipe App"); // Output the message that the app is exiting.
                         Console.ResetColor();
@@ -310,6 +315,19 @@ namespace RecipeApp.Classes
                 totalCalories += ingredient.Calories * ingredient.Quantity;
             }
             return totalCalories;
+        }
+
+        public void sortRecipes()
+        {
+            if(Recipes.Count == 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Please add recipe details first !!!!");
+                Console.ResetColor();
+                RecipeAppMenu();
+            }
+            Recipes.Sort((x, y) => x.recipeName.CompareTo(y.recipeName));
+            Console.WriteLine("Recipes have been sorted by name");
         }
        
         //------------------------------------------End of method-----------------------------------------//
