@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 
 namespace RecipeApp.Classes
 {
+    public delegate void CalorieDelegate(double totalCalories); // Delegate to calculate the total calories of the recipe.
+
     public class RecipeMethods
     {
         public List<Recipe> Recipes { get; set; } // Property to store the recipes.
@@ -136,6 +138,7 @@ namespace RecipeApp.Classes
                 RecipeAppMenu(); // Call the RecipeAppMenu method to display the menu again.
             }
 
+
             // Output the recipe details
             Console.ForegroundColor = ConsoleColor.Cyan; // Changes the colour of text
             Console.WriteLine("******************************"); 
@@ -148,6 +151,7 @@ namespace RecipeApp.Classes
                 Console.ForegroundColor = ConsoleColor.Green; // Changes the colour of text
                 Console.WriteLine($"Recipe Name: {recipe.recipeName}"); // Print the recipe name.
                 Console.ResetColor(); // Resets the colour text
+
 
                 double totalCalories = calculateCalories(recipe); // Calculate the total calories of the recipe.
                 if(totalCalories > 300) // If the total calories are over 300, the total calories will be printed in red.
@@ -162,6 +166,7 @@ namespace RecipeApp.Classes
                     Console.WriteLine($"Total Calories: {totalCalories}"); // Print the total calories.
                     Console.ResetColor(); // Resets the colour text
                 }
+
 
                 Console.ForegroundColor = ConsoleColor.Green; // Changes the colour of text
                 Console.WriteLine("Ingredients: "); // Print the ingredients.
@@ -207,12 +212,13 @@ namespace RecipeApp.Classes
                 Console.WriteLine($"{i + 1}. {Recipes[i].recipeName}"); // Print the recipe number and the recipe name.
             }
 
+
             if (!int.TryParse(Console.ReadLine(), out int recipeNumber) && recipeNumber >= 1 && recipeNumber <= Recipes.Count) // If the user enters an invalid recipe number, they will be prompted to enter a new recipe number.
             {
                 Console.WriteLine("Invalid"); // Output the message that the selection is invalid.
             }
-            Recipe recipe = Recipes[recipeNumber - 1]; // Select the recipe to scale the qauntity.
 
+            Recipe recipe = Recipes[recipeNumber - 1]; // Select the recipe to scale the qauntity.
             Console.ForegroundColor = ConsoleColor.Red; // Changes the colour of text
             Console.Write("Are you sure you want to scale recipe? (yes/no) : "); // Prompt the user to enter if they want to scale the recipe.
             Console.ResetColor(); // Resets the colour text
@@ -321,6 +327,8 @@ namespace RecipeApp.Classes
             }
         }
 
+        public event CalorieDelegate CalorieEvent; // Event to calculate the total calories of the recipe.
+
         public double calculateCalories(Recipe recipe) // Method to calculate the total calories of the recipe
         {
             double totalCalories = 0; // Initialize the total calories to 0
@@ -328,6 +336,12 @@ namespace RecipeApp.Classes
             {
                 totalCalories += ingredient.Calories * ingredient.Quantity; // Calculate the total calories
             }
+
+            if(totalCalories > 300)
+            {
+                CalorieEvent?.Invoke(totalCalories); // Invoke the event to calculate the total calories
+            }
+
             return totalCalories; // Return the total calories
         }
 
