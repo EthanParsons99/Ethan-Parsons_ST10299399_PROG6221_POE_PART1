@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeApp", "RecipeApp\Reci
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeApp.UnitTest", "RecipeApp.UnitTest\RecipeApp.UnitTest.csproj", "{7697E334-98E7-4952-92D2-B0F693A4ECCD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFRecipeApp", "WPFRecipeApp\WPFRecipeApp.csproj", "{21F699E1-4264-44C7-8892-F4CFA7A5770F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7697E334-98E7-4952-92D2-B0F693A4ECCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7697E334-98E7-4952-92D2-B0F693A4ECCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7697E334-98E7-4952-92D2-B0F693A4ECCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21F699E1-4264-44C7-8892-F4CFA7A5770F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21F699E1-4264-44C7-8892-F4CFA7A5770F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21F699E1-4264-44C7-8892-F4CFA7A5770F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21F699E1-4264-44C7-8892-F4CFA7A5770F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
