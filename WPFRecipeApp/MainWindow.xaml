@@ -1,100 +1,107 @@
-﻿<Window x:Class="WPFRecipeApp.MainWindow"
+﻿<Window x:Class="RecipeApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WPFRecipeApp"
-        mc:Ignorable="d"
-        Title="Recipe App" Height="450" Width="800">
+        Title="RecipeApp" Height="500" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
+        <!-- Left Column - Recipe List and Navigation -->
         <StackPanel Grid.Column="0" Margin="10">
-            <TextBlock Text="Recipe List" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
-            <ListBox x:Name="StoredRecipesListBox_MouseDoubleClick"/>
+            <TextBlock Text="Recipe List" FontSize="18" FontWeight="Bold" Margin="0,0,0,10" />
+            <ListBox x:Name="StoredRecipesListBox" Height="300" DisplayMemberPath="Name" SelectionMode="Single" 
+                     MouseDoubleClick="StoredRecipesListBox_MouseDoubleClick"/>
             <Button x:Name="BackToListButton" Content="Back to List" Click="BackToList_Click" Margin="0,10,0,0" Visibility="Collapsed"/>
         </StackPanel>
 
-
+        <!-- Right Column - Actions and Recipe Details -->
         <StackPanel Grid.Column="1" Margin="10">
-            <TextBlock Text="Options Menu" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+            <!-- Action ComboBox -->
             <ComboBox x:Name="ActionComboBox" SelectionChanged="ActionComboBox_SelectionChanged">
-                <ComboBoxItem Content="Add Recipe"/>
-                <ComboBoxItem Content="Scale Recipe"/>
-                <ComboBoxItem Content="Reset Recipe"/>
-                <ComboBoxItem Content="Delete Recipe"/>
+                <ComboBoxItem Content="Add Recipe" />
+                <ComboBoxItem Content="Scale Recipe" />
+                <ComboBoxItem Content="Reset Scaling"/>
+                <ComboBoxItem Content="Clear Recipe" />
             </ComboBox>
             <Button Content="Sort Recipes" Click="SortRecipes_Click" Margin="0,10,0,10"/>
 
-
-            <StackPanel x:Name="AddRecipeStackPanel" Visibility="Collapsed" Margin="0,10,0,10">
-                <TextBlock Text="Add Recipe" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+            <!-- Add Recipe Panel -->
+            <StackPanel x:Name="AddRecipePanel" Visibility="Collapsed" Margin="0,10,0,10">
+                <TextBlock Text="Add Recipe" FontSize="18" FontWeight="Bold" Margin="0,0,0,10" />
                 <TextBox x:Name="RecipeNameTextBox" TextWrapping="Wrap" Height="30" Margin="0,0,0,10"/>
 
-                <TextBlock Text="Recipe Ingredients" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+                <TextBlock Text="Ingredients" FontSize="18" FontWeight="Bold" Margin="0,10,0,5" />
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                    <TextBox x:Name="IngredientTextBox" TextWrapping="Wrap" Height="30" Width="200" Margin="0"/>
+                    <TextBox x:Name="IngredientTextBox" TextWrapping="Wrap" Height="30" Width="200" Margin="0,0,10,0"/>
                     <ComboBox x:Name="FoodGroupComboBox" Width="100">
-                        <ComboBoxItem Content="Fruit"/>
-                        <ComboBoxItem Content="Vegetable"/>
-                        <ComboBoxItem Content="Grain"/>
-                        <ComboBoxItem Content="Protein"/>
-                        <ComboBoxItem Content="Dairy"/>
-                        <ComboBoxItem Content="Fat"/>
+                        <ComboBoxItem Content="Fruit" />
+                        <ComboBoxItem Content="Vegetable" />
+                        <ComboBoxItem Content="Grain" />
+                        <ComboBoxItem Content="Protein" />
+                        <ComboBoxItem Content="Dairy" />
+                        <ComboBoxItem Content="Fat" />
+                        <ComboBoxItem Content="Sweets" />
                     </ComboBox>
                     <Button Content="Add Ingredient" Click="AddIngredient_Click" Width="100"/>
                 </StackPanel>
-
                 <ListBox x:Name="IngredientsListBox" Height="100" Margin="0,0,0,10"/>
                 <Button Content="Remove Ingredient" Click="RemoveIngredient_Click" Width="120"/>
 
-
-                <TextBlock Text="Recipe Instructions" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+                <TextBlock Text="Instructions" FontSize="18" FontWeight="Bold" Margin="0,10,0,5" />
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                    <TextBox x:Name="InstructionTextBox" TextWrapping="Wrap" Height="30" Width="200" Margin="0"/>
-                    <Button Content="Add Instruction" Click="AddInstruction_Click" Width="100"/>
+                    <TextBox x:Name="StepTextBox" TextWrapping="Wrap" Height="30" Width="200" Margin="0,0,10,0"/>
+                    <Button Content="Add Step" Click="AddStep_Click" Width="100"/>
                 </StackPanel>
-                <ListBox x:Name="InstructionListBox" Height="100" Margin="0,0,0,10"/>
-                <Button Content="Remove Instruction" Click="RemoveInstruction_Click" Width="120"/>
+                <ListBox x:Name="InstructionsListBox" Height="100" Margin="0,0,0,10"/>
+                <Button Content="Remove Step" Click="RemoveStep_Click" Width="120"/>
 
-                <Button Content="Add Recipe" Click="AddRecipe_Click" Width="100"/>
-
+                <Button Content="Add Recipe" Click="AddRecipe_Click" Width="100" Margin="0,10,0,0"/>
             </StackPanel>
 
-            <StackPanel x:Name="ScaleRecipeStackPanel" Visibility="Collapsed" Margin="0,10,0,10">
-                <TextBlock Text="Scale Recipe" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
-                <TextBox x:Name="ScaleFactorTextBox" TextWrapping="Wrap" Height="30" Margin="0,0,0,10"/>
-                <Button Content="Scale Recipe" Click="ScaleRecipe_Click" Width="100"/>
+            <!-- Recipe Details Panel -->
+            <StackPanel x:Name="RecipeDetailsPanel" Visibility="Collapsed" Margin="0,10,0,10">
+                <TextBlock Text="Recipe Details" FontSize="18" FontWeight="Bold" Margin="0,0,0,10" />
+                <TextBlock x:Name="DetailsRecipeName" FontWeight="Bold" Margin="0,0,0,5"/>
+                <ListBox x:Name="DetailsIngredientsListBox" Height="100" Margin="0,0,0,10"/>
+                <ListBox x:Name="DetailsInstructionsListBox" Height="150" Margin="0,0,0,10"/>
             </StackPanel>
 
-            <StackPanel x:Name="ResetScaling" Visibility="Collapsed" Margin="0,10,0,10">
+            <!-- Scale Recipe Panel -->
+            <StackPanel x:Name="ScaleRecipePanel" Visibility="Collapsed" Margin="0,10,0,10">
+                <TextBlock Text="Scale Recipe" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+                <TextBox x:Name="ScaleAmountTextBox" TextWrapping="Wrap" Height="30" Margin="0,0,0,10"/>
+                <Button Content="Scale Ingredients" Click="ScaleRecipe_Click" Width="150"/>
+            </StackPanel>
+
+            <!-- Reset Scaling Panel -->
+            <StackPanel x:Name="ResetScalingPanel" Visibility="Collapsed" Margin="0,10,0,10">
                 <Button Content="Reset Scaling" Click="ResetScaling_Click" Width="100"/>
             </StackPanel>
 
+            <!-- Clear Recipe Panel -->
             <StackPanel x:Name="ClearRecipePanel" Visibility="Collapsed" Margin="0,10,0,10">
                 <Button Content="Clear Recipe" Click="ClearRecipe_Click" Width="100"/>
             </StackPanel>
 
+            <!-- Filter Recipes Panel -->
             <StackPanel x:Name="FilterRecipesPanel" Margin="0,10,0,10">
-                <TextBlock Text="Filter Recipes" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
-                <TextBox x:Name="FilterIngredientTextBox" TextWrapping="Wrap" Height="30" Margin="0,0,0,10"/>
-                <ComboBox x:Name="FilterComboBox" SelectionChanged="FilterComboBox_SelectionChanged">
-                    <ComboBoxItem Content="All"/>
-                    <ComboBoxItem Content="Fruit"/>
-                    <ComboBoxItem Content="Vegetable"/>
-                    <ComboBoxItem Content="Grain"/>
-                    <ComboBoxItem Content="Protein"/>
-                    <ComboBoxItem Content="Dairy"/>
-                    <ComboBoxItem Content="Fat"/>
+                <TextBlock Text="Filter Recipes" FontSize="18" FontWeight="Bold" Margin="0,0,0,5" />
+                <TextBox x:Name="FilterIngredientTextBox" Margin="0,0,0,5" />
+                <ComboBox x:Name="FilterFoodGroupComboBox"  Margin="0,0,0,5">
+                    <ComboBoxItem Content="Vegetables" />
+                    <ComboBoxItem Content="Fruits" />
+                    <ComboBoxItem Content="Grains" />
+                    <ComboBoxItem Content="Proteins" />
+                    <ComboBoxItem Content="Dairy" />
+                    <ComboBoxItem Content="Fats" />
+                    <ComboBoxItem Content="Sweets" />
                 </ComboBox>
-                <TextBox x:Name="FilterMaxCaloriesTextBox" TextWrapping="Wrap" Height="30" Margin="0,0,0,10"/>
-                <Button Content="Filter Recipes" Click="FilterRecipes_Click" Width="100"/>
+                <TextBox x:Name="FilterMaxCaloriesTextBox" Margin="0,0,0,5" />
+                <Button Content="Apply Filters" Click="ApplyFilters_Click" Width="100" Margin="0,10,0,0" />
+                <Button Content="Clear Filters" Click="ClearFilters_Click" Width="100" />
             </StackPanel>
-
         </StackPanel>
     </Grid>
-</Window> 
-
+</Window>
