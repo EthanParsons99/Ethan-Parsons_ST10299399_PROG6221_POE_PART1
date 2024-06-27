@@ -69,9 +69,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Recipe.cs" />
-    <Compile Include="Models\RecipeDetails.cs" />
-    <Compile Include="Models\RecipeMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

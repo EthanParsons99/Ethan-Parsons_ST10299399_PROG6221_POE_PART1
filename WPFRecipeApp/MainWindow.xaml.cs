@@ -8,326 +8,332 @@ namespace RecipeApp
 {
     public partial class MainWindow : Window
     {
-        private ObservableCollection<Recipe> recipes = new ObservableCollection<Recipe>();
-        private Recipe selectedRecipeBackup;
+        private ObservableCollection<Recipe> recipes = new ObservableCollection<Recipe>(); // Collection of recipes
+        private Recipe selectedRecipeBackup; // Backup of the selected recipe
 
         public MainWindow()
         {
-            InitializeComponent();
-            StoredRecipesListBox.ItemsSource = recipes;
+            InitializeComponent(); // Initialize the main window
+            StoredRecipesListBox.ItemsSource = recipes; // Bind the list view to the recipes collection
         }
 
-        public class Recipe
+        public class Recipe // Recipe class with properties
         {
-            public string Name { get; set; }
-            public ObservableCollection<string> Ingredients { get; set; }
-            public ObservableCollection<string> Instructions { get; set; }
-            public int Calories { get; set; }
+            public string Name { get; set; } // Recipe name
+            public ObservableCollection<string> Ingredients { get; set; } // Ingredients list
+            public ObservableCollection<string> Instructions { get; set; } // Instructions list
+            public int Calories { get; set; } // Total calories
 
-            public Recipe()
+            public Recipe() // Constructor to initialize properties
             {
-                Ingredients = new ObservableCollection<string>();
-                Instructions = new ObservableCollection<string>();
+                Ingredients = new ObservableCollection<string>(); // Initialize ingredients list
+                Instructions = new ObservableCollection<string>(); // Initialize instructions list
             }
         }
 
-        private void AddRecipe_Click(object sender, RoutedEventArgs e)
+        private void AddRecipe_Click(object sender, RoutedEventArgs e) // Add a new recipe
         {
-            Recipe newRecipe = new Recipe
+            Recipe newRecipe = new Recipe // Create a new recipe object
             {
-                Name = RecipeNameTextBox.Text,
-                Ingredients = new ObservableCollection<string>(IngredientsListBox.Items.Cast<string>()),
-                Instructions = new ObservableCollection<string>(InstructionsListBox.Items.Cast<string>())
+                Name = RecipeNameTextBox.Text, // Set the recipe name
+                Ingredients = new ObservableCollection<string>(IngredientsListBox.Items.Cast<string>()), // Set the ingredients list
+                Instructions = new ObservableCollection<string>(InstructionsListBox.Items.Cast<string>()) // Set the instructions list
             };
 
-            // Calculate total calories
-            newRecipe.Calories = CalculateTotalCalories(newRecipe);
 
-            // Add the new recipe to the recipes collection
-            recipes.Add(newRecipe);
+            newRecipe.Calories = CalculateTotalCalories(newRecipe); // Calculate total calories
 
-            // Clear the input fields and reset UI
-            ClearRecipeFields();
+
+            recipes.Add(newRecipe); // Add the new recipe to the collection
+
+
+            ClearRecipeFields(); // Clear the recipe fields
         }
 
-        private int CalculateTotalCalories(Recipe recipe)
+        private int CalculateTotalCalories(Recipe recipe) // Calculate total calories of a recipe
         {
-            int totalCalories = 0;
+            int totalCalories = 0; // Initialize total calories
 
-            foreach (string ingredient in recipe.Ingredients)
+            foreach (string ingredient in recipe.Ingredients) // Loop through each ingredient
             {
-                // Example: "100 - ml water 0 calories"
-                string[] parts = ingredient.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
 
-                if (parts.Length >= 4 && parts[3].ToLower() == "calories")
+                string[] parts = ingredient.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries); // Split the ingredient into parts
+
+                if (parts.Length >= 4 && parts[3].ToLower() == "calories") // Check if the ingredient has calories
                 {
-                    if (int.TryParse(parts[2], out int calories))
+                    if (int.TryParse(parts[2], out int calories)) // Try to parse the calories
                     {
-                        totalCalories += calories;
+                        totalCalories += calories; // Add the calories to the total
+                    }
+                }
+                {
+                    if (int.TryParse(parts[2], out int calories)) // Try to parse the calories
+                    {
+                        totalCalories += calories; // Add the calories to the total
                     }
                 }
             }
 
-            return totalCalories;
+            return totalCalories; // Return the total calories
         }
 
-        private void AddIngredient_Click(object sender, RoutedEventArgs e)
+        private void AddIngredient_Click(object sender, RoutedEventArgs e) // Add a new ingredient
         {
-            if (!string.IsNullOrWhiteSpace(IngredientTextBox.Text))
+            if (!string.IsNullOrWhiteSpace(IngredientTextBox.Text)) // Check if the ingredient text box is not empty
             {
-                string foodGroup = ((ComboBoxItem)FoodGroupComboBox.SelectedItem).Content.ToString();
-                string ingredient = $"{IngredientTextBox.Text} 0 calories"; // Example format
+                string foodGroup = ((ComboBoxItem)FoodGroupComboBox.SelectedItem).Content.ToString(); // Get the selected food group
+                string ingredient = $"{IngredientTextBox.Text} 0 calories"; // Create the ingredient string
 
-                IngredientsListBox.Items.Add(ingredient);
-                IngredientTextBox.Clear();
+                IngredientsListBox.Items.Add(ingredient); // Add the ingredient to the list
+                IngredientTextBox.Clear(); // Clear the ingredient text box
+            }
+            {
+                string foodGroup = ((ComboBoxItem)FoodGroupComboBox.SelectedItem).Content.ToString(); // Get the selected food group
+                string ingredient = $"{IngredientTextBox.Text} 0 calories"; // Create the ingredient string
+
+                IngredientsListBox.Items.Add(ingredient); // Add the ingredient to the list
+                IngredientTextBox.Clear(); // Clear the ingredient text box
             }
         }
 
-        private void RemoveIngredient_Click(object sender, RoutedEventArgs e)
+        private void RemoveIngredient_Click(object sender, RoutedEventArgs e) // Remove selected ingredients
         {
-            while (IngredientsListBox.SelectedItems.Count > 0)
+            while (IngredientsListBox.SelectedItems.Count > 0) // Loop through each selected ingredient
             {
-                IngredientsListBox.Items.Remove(IngredientsListBox.SelectedItems[0]);
+                IngredientsListBox.Items.Remove(IngredientsListBox.SelectedItems[0]); // Remove the ingredient from the list
+            }
+            {
+                IngredientsListBox.Items.Remove(IngredientsListBox.SelectedItems[0]); // Remove the ingredient from the list
             }
         }
 
-        private void AddStep_Click(object sender, RoutedEventArgs e)
+        private void AddStep_Click(object sender, RoutedEventArgs e) // Add a new step
         {
-            if (!string.IsNullOrWhiteSpace(StepTextBox.Text))
+            if (!string.IsNullOrWhiteSpace(StepTextBox.Text)) // Check if the step text box is not empty
             {
-                InstructionsListBox.Items.Add(StepTextBox.Text);
-                StepTextBox.Clear();
+                InstructionsListBox.Items.Add(StepTextBox.Text); // Add the step to the list
+                StepTextBox.Clear(); // Clear the step text box
             }
         }
 
-        private void RemoveStep_Click(object sender, RoutedEventArgs e)
+        private void RemoveStep_Click(object sender, RoutedEventArgs e) // Remove selected steps
         {
-            while (InstructionsListBox.SelectedItems.Count > 0)
+            while (InstructionsListBox.SelectedItems.Count > 0) // Loop through each selected step
             {
-                InstructionsListBox.Items.Remove(InstructionsListBox.SelectedItems[0]);
+                InstructionsListBox.Items.Remove(InstructionsListBox.SelectedItems[0]); // Remove the step from the list
+            }
+            {
+                InstructionsListBox.Items.Remove(InstructionsListBox.SelectedItems[0]); // Remove the step from the list
             }
         }
 
-        private void StoredRecipesListBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void StoredRecipesListBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e) // Show recipe details on double click
         {
-            Recipe selectedRecipe = (Recipe)StoredRecipesListBox.SelectedItem;
+            Recipe selectedRecipe = (Recipe)StoredRecipesListBox.SelectedItem; // Get the selected recipe
 
-            if (selectedRecipe != null)
+            if (selectedRecipe != null) // Check if a recipe is selected
             {
-                selectedRecipeBackup = selectedRecipe;
+                selectedRecipeBackup = selectedRecipe; // Backup the selected recipe
 
-                // Display details in RecipeDetailsPanel
-                DetailsRecipeName.Text = selectedRecipe.Name;
+                DetailsRecipeName.Text = selectedRecipe.Name; // Set the recipe name
 
-                DetailsIngredientsListBox.ItemsSource = selectedRecipe.Ingredients;
-                DetailsInstructionsListBox.ItemsSource = selectedRecipe.Instructions;
+                DetailsIngredientsListBox.ItemsSource = selectedRecipe.Ingredients; // Set the ingredients list
+                DetailsInstructionsListBox.ItemsSource = selectedRecipe.Instructions; // Set the instructions list
 
-                // Show RecipeDetailsPanel
-                ShowRecipeDetailsPanel();
+                ShowRecipeDetailsPanel(); // Show the recipe details panel
             }
         }
 
-        private void ShowRecipeDetailsPanel()
+        private void ShowRecipeDetailsPanel() // Show the recipe details panel
         {
-            // Hide all action panels
-            HidePanels();
+            HidePanels(); // Hide all panels
 
-            // Show RecipeDetailsPanel and BackToListButton
-            RecipeDetailsPanel.Visibility = Visibility.Visible;
-            BackToListButton.Visibility = Visibility.Visible;
+            RecipeDetailsPanel.Visibility = Visibility.Visible; // Show the recipe details panel
+            BackToListButton.Visibility = Visibility.Visible; // Show the back to list button
         }
 
-        private void HidePanels()
+        private void HidePanels() // Hide all panels
         {
-            // Hide all panels
-            RecipeDetailsPanel.Visibility = Visibility.Collapsed;
-            AddRecipePanel.Visibility = Visibility.Collapsed;
-            ScaleRecipePanel.Visibility = Visibility.Collapsed;
-            ResetScalingPanel.Visibility = Visibility.Collapsed;
-            ClearRecipePanel.Visibility = Visibility.Collapsed;
-            FilterRecipesPanel.Visibility = Visibility.Collapsed;
+            RecipeDetailsPanel.Visibility = Visibility.Collapsed; // Hide the recipe details panel
+            AddRecipePanel.Visibility = Visibility.Collapsed; // Hide the add recipe panel
+            ScaleRecipePanel.Visibility = Visibility.Collapsed; // Hide the scale recipe panel
+            ResetScalingPanel.Visibility = Visibility.Collapsed; // Hide the reset scaling panel
+            ClearRecipePanel.Visibility = Visibility.Collapsed; // Hide the clear recipe panel
+            FilterRecipesPanel.Visibility = Visibility.Collapsed; // Hide the filter recipes panel
         }
 
-        private void BackToList_Click(object sender, RoutedEventArgs e)
+        private void BackToList_Click(object sender, RoutedEventArgs e) // Go back to the list view
         {
-            // Clear details and show list view
-            ClearRecipeFields();
-            ShowListView();
+            ClearRecipeFields(); // Clear the recipe fields
+            ShowListView(); // Show the list view
         }
 
-        private void ClearRecipe_Click(object sender, RoutedEventArgs e)
+        private void ClearRecipe_Click(object sender, RoutedEventArgs e) // Clear the recipe fields
         {
-            Recipe selectedRecipe = (Recipe)StoredRecipesListBox.SelectedItem;
-            if (selectedRecipe != null)
+            Recipe selectedRecipe = (Recipe)StoredRecipesListBox.SelectedItem; // Get the selected recipe
+            if (selectedRecipe != null) // Check if a recipe is selected
             {
-                recipes.Remove(selectedRecipe);
-                ClearRecipeFields();
+                recipes.Remove(selectedRecipe); // Remove the selected recipe
+                ClearRecipeFields(); // Clear the recipe fields
             }
         }
 
-        private void ClearRecipeFields()
+        private void ClearRecipeFields() // Clear the recipe fields
         {
-            RecipeNameTextBox.Clear();
-            IngredientsListBox.Items.Clear();
-            InstructionsListBox.Items.Clear();
+            RecipeNameTextBox.Clear(); // Clear the recipe name text box
+            IngredientsListBox.Items.Clear(); // Clear the ingredients list box
+            InstructionsListBox.Items.Clear(); // Clear the instructions list box
         }
 
-        private void ShowListView()
+        private void ShowListView() // Show the list view
         {
-            // Show the list view and hide other panels
-            StoredRecipesListBox.Visibility = Visibility.Visible;
-            ActionComboBox.Visibility = Visibility.Visible;
-            BackToListButton.Visibility = Visibility.Collapsed;
+            StoredRecipesListBox.Visibility = Visibility.Visible; // Show the list view
+            ActionComboBox.Visibility = Visibility.Visible; // Show the action combo box
+            BackToListButton.Visibility = Visibility.Collapsed; // Hide the back to list button
 
-            HidePanels();
+            HidePanels(); // Hide all panels
         }
 
-        private void ActionComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ActionComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) // Show the selected panel
         {
-            ComboBox comboBox = (ComboBox)sender;
-            ComboBoxItem selectedItem = (ComboBoxItem)comboBox.SelectedItem;
+            ComboBox comboBox = (ComboBox)sender; // Get the selected combo box
+            ComboBoxItem selectedItem = (ComboBoxItem)comboBox.SelectedItem; // Get the selected item
 
-            HidePanels(); // Hide all panels first
+            HidePanels(); // Hide all panels
 
-            switch (selectedItem.Content.ToString())
+            switch (selectedItem.Content.ToString()) // Show the selected panel
             {
-                case "Add Recipe":
-                    AddRecipePanel.Visibility = Visibility.Visible;
-                    break;
+                case "Add Recipe": // Add recipe panel
+                    AddRecipePanel.Visibility = Visibility.Visible; // Show the add recipe panel
+                    break; // Break the switch statement
                 case "Scale Recipe":
-                    ScaleRecipePanel.Visibility = Visibility.Visible;
+                    ScaleRecipePanel.Visibility = Visibility.Visible; // Show the scale recipe panel
                     break;
                 case "Reset Scaling":
-                    ResetScalingPanel.Visibility = Visibility.Visible;
+                    ResetScalingPanel.Visibility = Visibility.Visible; // Show the reset scaling panel
                     break;
                 case "Clear Recipe":
-                    ClearRecipePanel.Visibility = Visibility.Visible;
+                    ClearRecipePanel.Visibility = Visibility.Visible; // Show the clear recipe panel
                     break;
                 case "Filter Recipes":
-                    FilterRecipesPanel.Visibility = Visibility.Visible;
+                    FilterRecipesPanel.Visibility = Visibility.Visible; // Show the filter recipes panel
                     break;
-                default:
+                default: // Default case
                     break;
             }
         }
 
-        private void ScaleRecipe_Click(object sender, RoutedEventArgs e)
+        private void ScaleRecipe_Click(object sender, RoutedEventArgs e) // Scale the selected recipe
         {
-            if (double.TryParse(ScaleAmountTextBox.Text, out double scale))
+            if (double.TryParse(ScaleAmountTextBox.Text, out double scale)) // Check if the scale amount is a valid number
             {
-                Recipe selectedRecipe = (Recipe)StoredRecipesListBox.SelectedItem;
+                Recipe selectedRecipe = (Recipe)StoredRecipesListBox.SelectedItem; // Get the selected recipe
 
-                if (selectedRecipe != null)
+                if (selectedRecipe != null) // Check if a recipe is selected
                 {
-                    ScaleIngredients(selectedRecipe, scale);
+                    ScaleIngredients(selectedRecipe, scale); // Scale the ingredients
                     StoredRecipesListBox.Items.Refresh(); // Refresh list view
                 }
             }
-            else
+            else // Invalid scale amount
             {
-                MessageBox.Show("Please enter a valid scaling factor.");
+                MessageBox.Show("Please enter a valid scaling factor."); // Show an error message
             }
 
-            ScaleAmountTextBox.Clear();
+            ScaleAmountTextBox.Clear(); // Clear the scale amount text box
         }
 
-        private void ScaleIngredients(Recipe recipe, double scale)
+        private void ScaleIngredients(Recipe recipe, double scale) // Scale the ingredients of a recipe
         {
-            ObservableCollection<string> scaledIngredients = new ObservableCollection<string>();
+            ObservableCollection<string> scaledIngredients = new ObservableCollection<string>(); // Initialize scaled ingredients list
 
-            foreach (string ingredient in recipe.Ingredients)
+            foreach (string ingredient in recipe.Ingredients) // Loop through each ingredient
             {
-                if (ingredient.Contains("-"))
+                if (ingredient.Contains("-")) // Check if the ingredient contains a dash
                 {
-                    string[] parts = ingredient.Split(new[] { " - " }, StringSplitOptions.RemoveEmptyEntries);
-                    if (parts.Length == 2 && double.TryParse(parts[0], out double amount))
+                    string[] parts = ingredient.Split(new[] { " - " }, StringSplitOptions.RemoveEmptyEntries); // Split the ingredient into parts
+                    if (parts.Length == 2 && double.TryParse(parts[0], out double amount)) // Check if the ingredient has two parts and the first part is a number
                     {
-                        amount *= scale;
-                        scaledIngredients.Add($"{amount} - {parts[1]}");
+                        amount *= scale; // Scale the amount
+                        scaledIngredients.Add($"{amount} - {parts[1]}"); // Add the scaled ingredient
                     }
-                    else
+                    else // Invalid format
                     {
-                        scaledIngredients.Add(ingredient); // Add as is if format is not recognized
+                        scaledIngredients.Add(ingredient); // Add as is if invalid format
                     }
                 }
-                else
+                else // No dash found
                 {
-                    scaledIngredients.Add(ingredient); // Add as is if no "-" found
+                    scaledIngredients.Add(ingredient); // Add as is if no dash found
                 }
             }
 
-            recipe.Ingredients = scaledIngredients;
+            recipe.Ingredients = scaledIngredients; // Update the ingredients list
         }
 
-        private void ResetScaling_Click(object sender, RoutedEventArgs e)
+        private void ResetScaling_Click(object sender, RoutedEventArgs e) // Reset the scaling of the selected recipe
         {
-            Recipe selectedRecipe = (Recipe)StoredRecipesListBox.SelectedItem;
+            Recipe selectedRecipe = (Recipe)StoredRecipesListBox.SelectedItem; // Get the selected recipe
 
-            if (selectedRecipe != null)
+            if (selectedRecipe != null) // Check if a recipe is selected
             {
-                // Restore original ingredients
-                selectedRecipe.Ingredients = new ObservableCollection<string>(selectedRecipeBackup.Ingredients);
+
+                selectedRecipe.Ingredients = new ObservableCollection<string>(selectedRecipeBackup.Ingredients); // Reset the ingredients
                 StoredRecipesListBox.Items.Refresh(); // Refresh list view
             }
         }
 
-        private void SortRecipes_Click(object sender, RoutedEventArgs e)
+        private void SortRecipes_Click(object sender, RoutedEventArgs e) // Sort the recipes by name
         {
-            SortRecipes();
+            SortRecipes(); // Sort the recipes
         }
 
-        private void SortRecipes()
+        private void SortRecipes() // Sort the recipes by name
         {
-            var sortedRecipes = new ObservableCollection<Recipe>(recipes.OrderBy(r => r.Name));
-            recipes.Clear();
+            var sortedRecipes = new ObservableCollection<Recipe>(recipes.OrderBy(r => r.Name)); // Sort the recipes by name
+            recipes.Clear(); // Clear the recipes collection
 
-            foreach (var recipe in sortedRecipes)
+            foreach (var recipe in sortedRecipes) // Loop through each sorted recipe
             {
-                recipes.Add(recipe);
+                recipes.Add(recipe); // Add the recipe to the collection
             }
 
             StoredRecipesListBox.Items.Refresh(); // Refresh list view
         }
 
-        private void ApplyFilters_Click(object sender, RoutedEventArgs e)
+        private void ApplyFilters_Click(object sender, RoutedEventArgs e) // Apply filters to the recipes
         {
-            // Retrieve filter criteria
-            string filterIngredient = FilterIngredientTextBox.Text.Trim().ToLower();
-            string filterFoodGroup = (FilterFoodGroupComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
-            int.TryParse(FilterMaxCaloriesTextBox.Text.Trim(), out int filterMaxCalories);
+            string filterIngredient = FilterIngredientTextBox.Text.Trim().ToLower(); // Get the filter ingredient
+            string filterFoodGroup = (FilterFoodGroupComboBox.SelectedItem as ComboBoxItem)?.Content.ToString(); // Get the filter food group
+            int.TryParse(FilterMaxCaloriesTextBox.Text.Trim(), out int filterMaxCalories); // Get the filter max calories
 
-            // Apply filters
-            ObservableCollection<Recipe> filteredRecipes = new ObservableCollection<Recipe>();
+            ObservableCollection<Recipe> filteredRecipes = new ObservableCollection<Recipe>(); // Initialize filtered recipes collection
 
-            foreach (Recipe recipe in recipes)
+            foreach (Recipe recipe in recipes) // Loop through each recipe
             {
-                bool ingredientMatch = string.IsNullOrEmpty(filterIngredient) ||
-                                       recipe.Ingredients.Any(ingredient => ingredient.ToLower().Contains(filterIngredient));
+                bool ingredientMatch = string.IsNullOrEmpty(filterIngredient) || // Check if the ingredient matches the filter
+                                       recipe.Ingredients.Any(ingredient => ingredient.ToLower().Contains(filterIngredient)); // Check if the ingredient matches the filter
 
                 bool foodGroupMatch = string.IsNullOrEmpty(filterFoodGroup) ||
-                                      recipe.Ingredients.Any(ingredient => ingredient.ToLower().Contains(filterFoodGroup.ToLower()));
+                                      recipe.Ingredients.Any(ingredient => ingredient.ToLower().Contains(filterFoodGroup.ToLower())); // Check if the food group matches the filter
 
-                bool caloriesMatch = filterMaxCalories <= 0 || recipe.Calories <= filterMaxCalories;
+                bool caloriesMatch = filterMaxCalories <= 0 || recipe.Calories <= filterMaxCalories; // Check if the calories match the filter
 
-                if (ingredientMatch && foodGroupMatch && caloriesMatch)
+                if (ingredientMatch && foodGroupMatch && caloriesMatch) // Check if all filters match
                 {
-                    filteredRecipes.Add(recipe);
+                    filteredRecipes.Add(recipe); // Add the recipe to the filtered collection
                 }
             }
-
-            // Update the list view with filtered recipes
-            StoredRecipesListBox.ItemsSource = filteredRecipes;
+            StoredRecipesListBox.ItemsSource = filteredRecipes; // Update the list view to show the filtered recipes
         }
 
-        private void ClearFilters_Click(object sender, RoutedEventArgs e)
+        private void ClearFilters_Click(object sender, RoutedEventArgs e) // Clear the filters
         {
-            // Clear all filter inputs
-            FilterIngredientTextBox.Text = "";
-            FilterFoodGroupComboBox.SelectedIndex = -1;
-            FilterMaxCaloriesTextBox.Text = "";
+            FilterIngredientTextBox.Text = ""; // Clear the filter ingredient text box
+            FilterFoodGroupComboBox.SelectedIndex = -1; // Clear the filter food group combo box
+            FilterMaxCaloriesTextBox.Text = ""; // Clear the filter max calories text box
 
-            // Reset the list view to show all recipes
-            StoredRecipesListBox.ItemsSource = recipes;
+            StoredRecipesListBox.ItemsSource = recipes; 
         }
     }
 }
