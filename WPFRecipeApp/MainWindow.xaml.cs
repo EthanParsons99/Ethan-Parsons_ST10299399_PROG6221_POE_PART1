@@ -56,8 +56,23 @@ namespace WPFRecipeApp
         {
             int totalCalories = 0;
 
+            foreach (string ingredient in recipe.Ingredients)
+            {
+                string[] parts = ingredient.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
 
+                if (parts.Length >= 4 && parts[3].ToLower() == "calories")
+                {
+                    if (int.TryParse(parts[2], out int calories))
+                    {
+                        totalCalories += calories;
+                    }
+                }
+            }
+            return totalCalories;
         }
+
+
+
 
     }
 
