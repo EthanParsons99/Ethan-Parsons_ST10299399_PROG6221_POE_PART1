@@ -69,8 +69,15 @@
                 <TextBox x:Name="ScaleFactorTextBox" TextWrapping="Wrap" Height="30" Margin="0,0,0,10"/>
                 <Button Content="Scale Recipe" Click="ScaleRecipe_Click" Width="100"/>
             </StackPanel>
-            
-            
+
+            <StackPanel x:Name="ResetScaling" Visibility="Collapsed" Margin="0,10,0,10">
+                <Button Content="Reset Scaling" Click="ResetScaling_Click" Width="100"/>
+            </StackPanel>
+
+            <StackPanel x:Name="ClearRecipePanel" Visibility="Collapsed" Margin="0,10,0,10">
+                <Button Content="Clear Recipe" Click="ClearRecipe_Click" Width="100"/>
+            </StackPanel>
+
         </StackPanel>
     </Grid>
 </Window> 
