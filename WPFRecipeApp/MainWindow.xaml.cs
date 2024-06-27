@@ -52,6 +52,42 @@ namespace WPFRecipeApp
 
         }
 
+        private void AddIngredientButton_Click(object sender, RoutedEventArgs e)
+        {
+           if (!string.IsNullOrWhiteSpace(IngredientTextBox.Text))
+            {
+                string foodGroup = ((ComboBoxItem)FoodGroupComboBox.SelectedItem).Content.ToString();
+                string ingredient = $"{IngredientTextBox.Text} 0 calories";
+                IngredientsListBox.Items.Add(IngredientTextBox.Text);
+                IngredientTextBox.Clear();
+            }
+        }
+
+        private void RemoveIngredientButton_Click(object sender, RoutedEventArgs e)
+        {
+            while (IngredientsListBox.SelectedItems.Count > 0)
+            {
+                IngredientsListBox.Items.Remove(IngredientsListBox.SelectedItems[0]);
+            }
+        }
+
+        private void AddStepButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(StepTextBox.Text))
+            {
+                StepsListBox.Items.Add(StepTextBox.Text);
+                StepTextBox.Clear();
+            }
+        }
+
+        private void RemoveStepButton_Click(object sender, RoutedEventArgs e)
+        {
+            while (StepsListBox.SelectedItems.Count > 0)
+            {
+                StepsListBox.Items.Remove(StepsListBox.SelectedItems[0]);
+            }
+        }
+
         private int CalculateTotalCalories(Recipe recipe)
         {
             int totalCalories = 0;
