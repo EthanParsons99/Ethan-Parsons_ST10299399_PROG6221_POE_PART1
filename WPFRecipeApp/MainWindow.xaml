@@ -51,7 +51,20 @@
                 <ListBox x:Name="IngredientsListBox" Height="100" Margin="0,0,0,10"/>
                 <Button Content="Remove Ingredient" Click="RemoveIngredient_Click" Width="120"/>
 
+
+                <TextBlock Text="Recipe Instructions" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <TextBox x:Name="InstructionTextBox" TextWrapping="Wrap" Height="30" Width="200" Margin="0"/>
+                    <Button Content="Add Instruction" Click="AddInstruction_Click" Width="100"/>
+                </StackPanel>
+                <ListBox x:Name="InstructionListBox" Height="100" Margin="0,0,0,10"/>
+                <Button Content="Remove Instruction" Click="RemoveInstruction_Click" Width="120"/>
+
+                <Button Content="Add Recipe" Click="AddRecipe_Click" Width="100"/>
+
             </StackPanel>
+            
+            
         </StackPanel>
     </Grid>
 </Window> 
